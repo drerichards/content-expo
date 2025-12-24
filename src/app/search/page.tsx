@@ -3,9 +3,9 @@
 import SearchBar from "@/app/ui/components/SearchBar";
 import { useState } from "react";
 import { ContentItem, mockItems } from "../data/mockData";
-import ArticleCard from "@/app/ui/components/ArticleCard";
-import VideoCard from "@/app/ui/components/VideoCard";
-import DetailPanel from "@/app/ui/components/DetailPanel";
+import ArticleCard from "@/app/ui/components/ArticleCard/ArticleCard";
+import VideoCard from "@/app/ui/components/VideoCard/VideoCard";
+import DetailPanel from "@/app/ui/components/DetailPanel/DetailPanel";
 import styles from "./Search.module.css";
 
 export default function SearchPage() {
