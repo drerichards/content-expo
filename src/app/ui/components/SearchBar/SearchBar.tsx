@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import styles from "@/app/search/Search.module.css";
+import styles from "./SearchBar.module.css";
 
 export default function SearchBar({
   onSearch,
@@ -16,7 +16,7 @@ export default function SearchBar({
   }
 
   return (
-    <form onSubmit={handleSubmit} className={styles.searchForm}>
+    <form onSubmit={handleSubmit} className={styles.searchBar}>
       <input
         type="text"
         value={query}

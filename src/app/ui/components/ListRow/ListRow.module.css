@@ -1,0 +1,22 @@
+.row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 0.5rem 0.25rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.row:hover,
+.row:focus {
+  background-color: #f9fafb;
+}
+
+.title {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.source {
+  font-size: 0.8rem;
+  color: #6b7280;
+}

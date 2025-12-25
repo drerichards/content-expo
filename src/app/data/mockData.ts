@@ -1,30 +1,76 @@
-export type ContentItem = {
-    id: string;
-    type: "video" | "article";
-    title: string;
-    description: string;
-    source: string;
-    url: string;
-    publishedAt: string;
-};
+import { ContentItem } from "@/app/types";
 
 export const mockItems: ContentItem[] = [
-    {
-        id: "1",
-        type: "video",
-        title: "Understanding React Hooks",
-        description: "Overview of useState, useEffect, and patterns",
-        source: "ReactConf",
-        url: "https://www.youtube.com/watch?v=xxxxxx",
-        publishedAt: "2024-05-10",
-    },
-    {
-        id: "2",
-        type: "article",
-        title: "JavaScript Promises Explained",
-        description: "A practical guide to JS Promises and async",
-        source: "JSGuide.com",
-        url: "https://jsguide.com/promises",
-        publishedAt: "2023-11-22",
-    },
+  {
+    id: "1",
+    type: "video",
+    title: "Understanding React Hooks",
+    description: "Overview of useState, useEffect, and common patterns",
+    source: "ReactConf",
+    url: "https://www.youtube.com/watch?v=xxxxxx",
+    publishedAt: "2024-05-10",
+  },
+  {
+    id: "2",
+    type: "article",
+    title: "JavaScript Promises Explained",
+    description: "A practical guide to JS Promises and async",
+    source: "JSGuide.com",
+    url: "https://jsguide.com/promises",
+    publishedAt: "2023-11-22",
+  },
+  {
+    id: "3",
+    type: "video",
+    title: "Async Await Deep Dive",
+    description: "How async/await works under the hood",
+    source: "Fireship",
+    url: "https://www.youtube.com/watch?v=yyyyyy",
+    publishedAt: "2024-01-18",
+  },
+  {
+    id: "4",
+    type: "article",
+    title: "A Mental Model for Closures",
+    description: "Closures explained with simple mental models",
+    source: "Overreacted.io",
+    url: "https://overreacted.io/a-complete-guide-to-closures/",
+    publishedAt: "2022-08-14",
+  },
+  {
+    id: "5",
+    type: "video",
+    title: "React Rendering Explained",
+    description: "What causes renders and re-renders in React",
+    source: "Kent C. Dodds",
+    url: "https://www.youtube.com/watch?v=zzzzzz",
+    publishedAt: "2023-09-02",
+  },
+  {
+    id: "6",
+    type: "article",
+    title: "Event Loop Visualized",
+    description: "How the JavaScript event loop actually works",
+    source: "MDN",
+    url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop",
+    publishedAt: "2023-06-01",
+  },
+  {
+    id: "7",
+    type: "video",
+    title: "State Management Without Redux",
+    description: "Modern approaches to state management in React",
+    source: "Frontend Masters",
+    url: "https://www.youtube.com/watch?v=aaaaaa",
+    publishedAt: "2024-02-05",
+  },
+  {
+    id: "8",
+    type: "article",
+    title: "TypeScript for JavaScript Developers",
+    description: "Why and how to gradually adopt TypeScript",
+    source: "TypeScript Handbook",
+    url: "https://www.typescriptlang.org/docs/",
+    publishedAt: "2023-10-11",
+  },
 ];

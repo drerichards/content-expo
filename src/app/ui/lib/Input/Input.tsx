@@ -4,7 +4,7 @@ import styles from "./Input.module.css";
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 export function Input({ className, ...props }: InputProps) {
-    const classes = [styles.input, className].filter(Boolean).join(" ");
+  const classes = [styles.input, className].filter(Boolean).join(" ");
 
-    return <input className={classes} {...props} />;
+  return <input className={classes} {...props} />;
 }

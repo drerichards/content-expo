@@ -1,0 +1,63 @@
+import styles from "./ResultsList.module.css";
+import { Bookmark, ContentItem } from "@/app/types";
+import ListRow from "../ListRow/ListRow";
+
+type ResultsListProps = {
+  results: ContentItem[];
+  selectedItem: ContentItem | null;
+  setSelectedItem: (item: ContentItem) => void;
+  isBookmarked: (id: string) => boolean;
+  toggleBookmark: (bookmark: Bookmark) => void;
+  toBookmark: (item: ContentItem) => Bookmark;
+  videos: ContentItem[];
+  articles: ContentItem[];
+};
+
+export default function ResultsList({
+  results,
+  selectedItem,
+  setSelectedItem,
+  isBookmarked,
+  toggleBookmark,
+  toBookmark,
+  videos,
+  articles,
+}: ResultsListProps) {
+  return (
+    <div>
+      {results.length > 0 && (
+        <div
+          className={selectedItem ? styles.resultsStacked : styles.resultsGrid}
+        >
+          <div className={styles.column}>
+            <h2>VIDEOS</h2>
+            {videos.map((v) => (
+              <ListRow
+                key={v.id}
+                title={v.title}
+                source={v.source}
+                isBookmarked={isBookmarked(v.id)}
+                onToggleBookmark={() => toggleBookmark(toBookmark(v))}
+                onClick={() => setSelectedItem(v)}
+              />
+            ))}
+          </div>
+
+          <div className={styles.column}>
+            <h2>ARTICLES</h2>
+            {articles.map((a) => (
+              <ListRow
+                key={a.id}
+                title={a.title}
+                source={a.source}
+                isBookmarked={isBookmarked(a.id)}
+                onToggleBookmark={() => toggleBookmark(toBookmark(a))}
+                onClick={() => setSelectedItem(a)}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
