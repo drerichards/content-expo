@@ -50,3 +50,15 @@
 .subtitle {
   color: #6b7280;
 }
+
+.searchPrompt {
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+.noResults {
+  margin-top: 2rem;
+  font-size: 0.95rem;
+  color: #6b7280;
+}

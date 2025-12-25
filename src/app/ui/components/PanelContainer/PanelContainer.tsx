@@ -2,14 +2,14 @@ import styles from "./PanelContainer.module.css";
 
 type PanelContainerProps = {
   children?: React.ReactNode;
-  hasDetail?: boolean;
+  hasSelectedItem?: boolean;
   sideCollapsed?: boolean;
 };
 
 // holds side and main panels
 export default function PanelContainer({
   children,
-  hasDetail,
+  hasSelectedItem: hasDetail,
   sideCollapsed,
 }: PanelContainerProps) {
   const className = [

@@ -21,6 +21,11 @@ export default function DetailPanel({
 }: DetailPanelProps) {
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
 
+  const isVideo = item.type === "video";
+  const mediaHref = item.url;
+  const summaryCta = isVideo ? "Watch on YouTube" : "Read full article";
+  const summaryTitle = "Summary";
+
   return (
     <main className={styles.detailPanel}>
       <div className={styles.panelHeader}>
@@ -28,16 +33,8 @@ export default function DetailPanel({
           <button
             className={styles.toggleButton}
             onClick={toggleSide}
-            title={
-              isSideCollapsed
-                ? "Expand results panel"
-                : "Collapse results panel"
-            }
-            aria-label={
-              isSideCollapsed
-                ? "Expand results panel"
-                : "Collapse results panel"
-            }
+            title={isSideCollapsed ? "Expand panel" : "Collapse panel"}
+            aria-label={isSideCollapsed ? "Expand panel" : "Collapse panel"}
           >
             <span>{isSideCollapsed ? "❯" : "❮"}</span>
           </button>
@@ -48,11 +45,11 @@ export default function DetailPanel({
         </button>
       </div>
       <p className={styles.meta}>
-        {item.source} — {item.publishedAt}
+        {item.source} - {item.publishedAt}
       </p>
 
-      {item.type === "video" && (
-        <div className={styles.mediaWrapper}>
+      <div className={styles.mediaWrapper}>
+        {isVideo ? (
           <iframe
             width="100%"
             height={embedHeight}
@@ -63,39 +60,7 @@ export default function DetailPanel({
             title="Video"
             allowFullScreen
           ></iframe>
-
-          <button
-            type="button"
-            className={styles.summaryTab}
-            onClick={() => setIsSummaryOpen((open) => !open)}
-          >
-            <span>{isSummaryOpen ? "⌄" : "⌃"}</span>
-          </button>
-
-          {isSummaryOpen && (
-            <div className={styles.articleSummary}>
-              <h3>Summary</h3>
-              <p className={styles.description}>{item.description}</p>
-
-              <div className={styles.callout}>
-                <span>Source:</span> {item.source}
-              </div>
-
-              <a
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.link}
-              >
-                Watch on YouTube
-              </a>
-            </div>
-          )}
-        </div>
-      )}
-
-      {item.type === "article" && (
-        <div className={styles.mediaWrapper}>
+        ) : (
           <iframe
             src={item.url}
             className={styles.mediaEmbed}
@@ -103,36 +68,36 @@ export default function DetailPanel({
               (e.currentTarget as HTMLIFrameElement).style.display = "none";
             }}
           />
+        )}
 
-          <button
-            type="button"
-            className={styles.summaryTab}
-            onClick={() => setIsSummaryOpen((open) => !open)}
-          >
-            <span>{isSummaryOpen ? "⌄" : "⌃"}</span>
-          </button>
+        <button
+          type="button"
+          className={styles.summaryTab}
+          onClick={() => setIsSummaryOpen((open) => !open)}
+        >
+          <span>{isSummaryOpen ? "⌄" : "⌃"}</span>
+        </button>
 
-          {isSummaryOpen && (
-            <div className={styles.articleSummary}>
-              <h3>Summary</h3>
-              <p className={styles.description}>{item.description}</p>
+        {isSummaryOpen && (
+          <div className={styles.summaryWindow}>
+            <h3>{summaryTitle}</h3>
+            <p className={styles.description}>{item.description}</p>
 
-              <div className={styles.callout}>
-                <span>Source:</span> {item.source}
-              </div>
-
-              <a
-                href={item.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.link}
-              >
-                Read full article
-              </a>
+            <div className={styles.callout}>
+              <span>Source:</span> {item.source}
             </div>
-          )}
-        </div>
-      )}
+
+            <a
+              href={mediaHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.link}
+            >
+              {summaryCta}
+            </a>
+          </div>
+        )}
+      </div>
     </main>
   );
 }
