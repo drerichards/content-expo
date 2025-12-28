@@ -1,6 +1,6 @@
-import styles from "./ListRow.module.css";
+import styles from "./ArticleCard.module.css";
 
-type ListRowProps = {
+type ArticleCardProps = {
   title: string;
   source: string;
   isBookmarked: boolean;
@@ -8,13 +8,13 @@ type ListRowProps = {
   onToggleBookmark: () => void;
 };
 
-export default function ListRow({
+export default function ArticleCard({
   title,
   source,
   isBookmarked,
   onClick,
   onToggleBookmark,
-}: ListRowProps) {
+}: ArticleCardProps) {
   return (
     <div
       className={styles.row}

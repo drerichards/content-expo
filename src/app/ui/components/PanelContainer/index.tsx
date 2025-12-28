@@ -3,19 +3,19 @@ import styles from "./PanelContainer.module.css";
 type PanelContainerProps = {
   children?: React.ReactNode;
   hasSelectedItem?: boolean;
-  sideCollapsed?: boolean;
+  sideOpen?: boolean;
 };
 
 // holds side and main panels
 export default function PanelContainer({
   children,
   hasSelectedItem: hasDetail,
-  sideCollapsed,
+  sideOpen,
 }: PanelContainerProps) {
   const className = [
     styles.panelContainer,
-    hasDetail && !sideCollapsed ? styles.panelSplitContainer : null,
-    sideCollapsed ? styles.panelCollapsed : null,
+    hasDetail && !sideOpen ? styles.panelSplitContainer : null,
+    sideOpen ? styles.panelOpen : null,
   ]
     .filter(Boolean)
     .join(" ");

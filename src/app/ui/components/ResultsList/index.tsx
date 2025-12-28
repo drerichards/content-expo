@@ -1,6 +1,7 @@
 import styles from "./ResultsList.module.css";
-import { Bookmark, ContentItem } from "@/app/types";
-import ListRow from "../ListRow/ListRow";
+import { Bookmark, ContentItem, YoutubeSearchResult } from "@/app/types";
+import YoutubeCard from "../YoutubeCard";
+import ArticleCard from "../ArticleCard";
 
 type ResultsListProps = {
   results: boolean;
@@ -9,7 +10,7 @@ type ResultsListProps = {
   isBookmarked: (id: string) => boolean;
   toggleBookmark: (bookmark: Bookmark) => void;
   toBookmark: (item: ContentItem) => Bookmark;
-  videos: ContentItem[];
+  videos: YoutubeSearchResult[];
   articles: ContentItem[];
 };
 
@@ -31,22 +32,23 @@ export default function ResultsList({
         >
           <div className={styles.column}>
             <h2>VIDEOS</h2>
-            {videos.map((v) => (
-              <ListRow
-                key={v.id}
-                title={v.title}
-                source={v.source}
-                isBookmarked={isBookmarked(v.id)}
-                onToggleBookmark={() => toggleBookmark(toBookmark(v))}
-                onClick={() => setSelectedItem(v)}
-              />
-            ))}
+            {videos.map((v) => {
+              return (
+                <YoutubeCard
+                  key={v.id}
+                  video={v}
+                  isBookmarked={isBookmarked(v.id)}
+                  onToggleBookmark={() => toggleBookmark(toBookmark(v))}
+                  onClick={() => setSelectedItem(v)}
+                />
+              );
+            })}
           </div>
 
           <div className={styles.column}>
             <h2>ARTICLES</h2>
             {articles.map((a) => (
-              <ListRow
+              <ArticleCard
                 key={a.id}
                 title={a.title}
                 source={a.source}

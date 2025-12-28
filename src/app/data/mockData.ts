@@ -1,109 +1,248 @@
-import { ContentItem } from "@/app/types";
+import { ContentItem, YoutubeSearchResult } from "@/app/types";
 
-export const mockItems: ContentItem[] = [
-  // Videos from sample YouTube searchListResponse
+export const mockItems: (ContentItem | YoutubeSearchResult)[] = [
   {
-    id: "4AXQgOcL1mo",
+    id: "lkIFF4maKMU",
     type: "video",
-    title: "7 React Lessons I Wish I Knew Earlier",
+    title: "100+ JavaScript Concepts you Need to Know",
+    channelId: "UCsBjURrPoezykLs9EqgamOA",
+    channelTitle: "Fireship",
     description:
-      "Join the Bootcamp: https://reactbootcamp.dev Chapters: 0:00 - React State Must Be Immutable 1:26 - Don't Use State for ...",
-    source: "Code Bootcamp",
-    url: "https://www.youtube.com/watch?v=4AXQgOcL1mo",
-    publishedAt: "2024-04-22T10:00:03Z",
-  },
-  {
-    id: "wIyHSOugGGw",
-    type: "video",
-    title: "Every React Concept Explained in 12 Minutes",
-    description:
-      "My React course: https://reactbootcamp.dev Chapters 0:00 - Intro 0:11 - Components 0:29 - JSX 1:02 - Curly Braces 1:29 ...",
-    source: "Code Bootcamp",
-    url: "https://www.youtube.com/watch?v=wIyHSOugGGw",
-    publishedAt: "2024-03-18T12:00:52Z",
-  },
-  {
-    id: "Zpvzv8Uma8Q",
-    type: "video",
-    title: "HARD React Interview Questions (3 patterns)",
-    description:
-      "Maybe you've been doing React for a few years and are ready for a senior role. But you wonder: what'll be asked in an advanced ...",
-    source: "Peter Elbaum",
-    url: "https://www.youtube.com/watch?v=Zpvzv8Uma8Q",
-    publishedAt: "2021-10-15T13:00:14Z",
-  },
-  {
-    id: "dCLhUialKPQ",
-    type: "video",
-    title:
-      "React JS 19 Full Course 2025 | Build an App and Master React in 2 Hours",
-    description:
-      "Dive straight into React—from basic JSX to advanced hooks—and build a real, modern app in this hands-on crash course!",
-    source: "JavaScript Mastery",
-    url: "https://www.youtube.com/watch?v=dCLhUialKPQ",
-    publishedAt: "2025-01-24T14:21:30Z",
-  },
-  {
-    id: "b0IZo2Aho9Y",
-    type: "video",
-    title: "10 React Antipatterns to Avoid - Code This, Not That!",
-    description:
-      "React is a minimal on the surface, but it's actually a highly complex JavaScript UI library with many potential pitfalls. In this tutorial ...",
+      "The ultimate 10 minute JavaScript course that quickly breaks down over 100 key concepts every web developer should know.",
     source: "Fireship",
-    url: "https://www.youtube.com/watch?v=b0IZo2Aho9Y",
-    publishedAt: "2022-03-01T17:03:24Z",
+    url: "https://www.youtube.com/watch?v=lkIFF4maKMU",
+    publishedAt: "2022-11-22T15:04:57Z",
+    thumbnails: [
+      {
+        url: "https://i.ytimg.com/vi/lkIFF4maKMU/default.jpg",
+        width: 120,
+        height: 90,
+      },
+      {
+        url: "https://i.ytimg.com/vi/lkIFF4maKMU/mqdefault.jpg",
+        width: 320,
+        height: 180,
+      },
+    ],
   },
   {
-    id: "TtPXvEcE11E",
+    id: "I5_Gx3JNho8",
+    type: "video",
+    title: "How To Master JavaScript",
+    channelId: "UC8ENHE5xdFSwx71u3fDH5Xw",
+    channelTitle: "ThePrimeagen",
+    description:
+      "Twitch Everything is built live on twitch Twitch : https://bit.ly/3xhFO3E Discord: discord.gg/ThePrimeagen Spotify DevHour: ...",
+    source: "ThePrimeagen",
+    url: "https://www.youtube.com/watch?v=I5_Gx3JNho8",
+    publishedAt: "2024-05-29T19:37:45Z",
+    thumbnails: [
+      {
+        url: "https://i.ytimg.com/vi/I5_Gx3JNho8/default.jpg",
+        width: 120,
+        height: 90,
+      },
+      {
+        url: "https://i.ytimg.com/vi/I5_Gx3JNho8/mqdefault.jpg",
+        width: 320,
+        height: 180,
+      },
+    ],
+  },
+  {
+    id: "NCwa_xi0Uuc",
+    type: "video",
+    title: "ES6 Tutorial: Learn Modern JavaScript in 1 Hour",
+    channelId: "UCWv7vMbMWH4-V0ZXdmDpPBA",
+    channelTitle: "Programming with Mosh",
+    description:
+      "Building an app or preparing for a JavaScript interview? Watch this ES6 tutorial to learn ES6 quickly. Subscribe to my channel ...",
+    source: "Programming with Mosh",
+    url: "https://www.youtube.com/watch?v=NCwa_xi0Uuc",
+    publishedAt: "2018-06-29T19:50:21Z",
+    thumbnails: [
+      {
+        url: "https://i.ytimg.com/vi/NCwa_xi0Uuc/default.jpg",
+        width: 120,
+        height: 90,
+      },
+      {
+        url: "https://i.ytimg.com/vi/NCwa_xi0Uuc/mqdefault.jpg",
+        width: 320,
+        height: 180,
+      },
+    ],
+  },
+  {
+    id: "VmY22KuRDbk",
     type: "video",
     title:
-      "React Tutorial Full Course - Beginner to Pro (React 19, 2025)",
+      "How to implement Clean Architecture in Node.js (and why it's important)",
+    channelId: "UCsrVDPJBYeXItETFHG0qzyw",
+    channelTitle: "Web Dev Cody",
     description:
-      "In this React tutorial and React full course, build websites and projects with React. React Premium Course: ...",
-    source: "SuperSimpleDev",
-    url: "https://www.youtube.com/watch?v=TtPXvEcE11E",
-    publishedAt: "2025-09-15T21:40:30Z",
+      "As software systems grow, they can start to become unmanageable, especially when working with teams of multiple engineers on ...",
+    source: "Web Dev Cody",
+    url: "https://www.youtube.com/watch?v=VmY22KuRDbk",
+    publishedAt: "2022-02-21T13:00:23Z",
+    thumbnails: [
+      {
+        url: "https://i.ytimg.com/vi/VmY22KuRDbk/default.jpg",
+        width: 120,
+        height: 90,
+      },
+      {
+        url: "https://i.ytimg.com/vi/VmY22KuRDbk/mqdefault.jpg",
+        width: 320,
+        height: 180,
+      },
+    ],
   },
   {
-    id: "RR6R1NVkm5k",
+    id: "zO6CHvTErxE",
     type: "video",
-    title: "Advanced React Query Pattern",
-    description:
-      "Advanced React Query Pattern #react #reactjs #reactjsdeveloper #programming #progammer #frontend #devtok #coding #code ...",
-    source: "Cosden Solutions",
-    url: "https://www.youtube.com/watch?v=RR6R1NVkm5k",
-    publishedAt: "2024-10-14T12:34:02Z",
+    title:
+      "The best thing you can do with JavaScript #javascript #programming",
+    channelId: "UC6aTLuI_j4-0wiDSzmaPctQ",
+    channelTitle: "Sam Meech-Ward",
+    description: "",
+    source: "Sam Meech-Ward",
+    url: "https://www.youtube.com/watch?v=zO6CHvTErxE",
+    publishedAt: "2023-12-03T23:13:17Z",
+    thumbnails: [
+      {
+        url: "https://i.ytimg.com/vi/zO6CHvTErxE/default.jpg",
+        width: 120,
+        height: 90,
+      },
+      {
+        url: "https://i.ytimg.com/vi/zO6CHvTErxE/mqdefault.jpg",
+        width: 320,
+        height: 180,
+      },
+    ],
   },
   {
-    id: "LOH1l-MP_9k",
+    id: "xB3ZmUH6GqU",
     type: "video",
-    title: "ALL React Hooks Explained in 12 Minutes",
+    title: "How to Learn JavaScript FAST in 2025",
+    channelId: "UCfbNkHkjYUjRGV67vVCOVsQ",
+    channelTitle: "Catherine Li",
     description:
-      "My React course: https://reactbootcamp.dev Chapters 0:00 - Intro 0:32 - Map of Hooks 1:02 - useState 2:14 - useReducer 3:15 ...",
-    source: "Code Bootcamp",
-    url: "https://www.youtube.com/watch?v=LOH1l-MP_9k",
-    publishedAt: "2024-04-04T11:00:28Z",
+      "If you want to get an easy introduction to JavaScript to help you take your code to the next level, check out this free resource from ...",
+    source: "Catherine Li",
+    url: "https://www.youtube.com/watch?v=xB3ZmUH6GqU",
+    publishedAt: "2025-04-01T14:30:29Z",
+    thumbnails: [
+      {
+        url: "https://i.ytimg.com/vi/xB3ZmUH6GqU/default.jpg",
+        width: 120,
+        height: 90,
+      },
+      {
+        url: "https://i.ytimg.com/vi/xB3ZmUH6GqU/mqdefault.jpg",
+        width: 320,
+        height: 180,
+      },
+    ],
   },
   {
-    id: "3BN-YHcJfOY",
+    id: "TjjKcgtlsY8",
     type: "video",
-    title: "The React Interview Questions You need to Know",
+    title: "JavaScript Speed Course - Learn JavaScript in ~75 Minutes",
+    channelId: "UC4JX40jDee_tINbkjycV4Sg",
+    channelTitle: "Tech With Tim",
     description:
-      "Enhance your React interview skills with this insightful guide to the Most Frequent Interview Questions, We'll cover 5 junior to ...",
-    source: "CoderOne",
-    url: "https://www.youtube.com/watch?v=3BN-YHcJfOY",
-    publishedAt: "2023-11-20T02:00:01Z",
+      "This JavaScript Speed course will teach you JavaScript as efficiently as possible in about 75 minutes. Checkout this free resource ...",
+    source: "Tech With Tim",
+    url: "https://www.youtube.com/watch?v=TjjKcgtlsY8",
+    publishedAt: "2024-11-11T16:22:07Z",
+    thumbnails: [
+      {
+        url: "https://i.ytimg.com/vi/TjjKcgtlsY8/default.jpg",
+        width: 120,
+        height: 90,
+      },
+      {
+        url: "https://i.ytimg.com/vi/TjjKcgtlsY8/mqdefault.jpg",
+        width: 320,
+        height: 180,
+      },
+    ],
   },
   {
-    id: "5r25Y9Vg2P4",
+    id: "9-r0RuX0pqk",
     type: "video",
-    title: "All 17 React Best Practices (IMPORTANT!)",
+    title: "Every Frontend Architecture Pattern Explained in 23 Minutes",
+    channelId: "UC07G4rT6ZvDv0lokaVHKeQw",
+    channelTitle: "theSeniorDev",
     description:
-      "Check out Semaphor: https://semaphor.cloud (paid sponsorship). Disclaimer: this is a sponsored video (paid). It's your ...",
-    source: "ByteGrad",
-    url: "https://www.youtube.com/watch?v=5r25Y9Vg2P4",
-    publishedAt: "2024-08-01T18:56:19Z",
+      "Most Asked Interview Questions for JS Devs ...",
+    source: "theSeniorDev",
+    url: "https://www.youtube.com/watch?v=9-r0RuX0pqk",
+    publishedAt: "2025-09-29T14:59:29Z",
+    thumbnails: [
+      {
+        url: "https://i.ytimg.com/vi/9-r0RuX0pqk/default.jpg",
+        width: 120,
+        height: 90,
+      },
+      {
+        url: "https://i.ytimg.com/vi/9-r0RuX0pqk/mqdefault.jpg",
+        width: 320,
+        height: 180,
+      },
+    ],
   },
+  {
+    id: "8hKo9Xa4cXk",
+    type: "video",
+    title: "Ep20 - Intermediate JavaScript Course",
+    channelId: "UCU5RsUGkVcPM9QvFHyKm1OQ",
+    channelTitle: "Acadea.io",
+    description:
+      "Check out https://acadea.io/learn for more content! Join my newsletter here to get the BEST updates: https://sendfox.com/acadea ...",
+    source: "Acadea.io",
+    url: "https://www.youtube.com/watch?v=8hKo9Xa4cXk",
+    publishedAt: "2021-04-20T01:00:00Z",
+    thumbnails: [
+      {
+        url: "https://i.ytimg.com/vi/8hKo9Xa4cXk/default.jpg",
+        width: 120,
+        height: 90,
+      },
+      {
+        url: "https://i.ytimg.com/vi/8hKo9Xa4cXk/mqdefault.jpg",
+        width: 320,
+        height: 180,
+      },
+    ],
+  },
+  {
+    id: "mc0s-viF7q4",
+    type: "video",
+    title: "Learning JavaScript for the First Time After HTML and CSS",
+    channelId: "UCsU9oPWOlZcTo-USOHHzs6w",
+    channelTitle: "Dev in Details",
+    description:
+      "Like and comment if this was you when you first started learning JavaScript     Video Credit: zavierlowe on tiktok #shorts.",
+    source: "Dev in Details",
+    url: "https://www.youtube.com/watch?v=mc0s-viF7q4",
+    publishedAt: "2021-09-24T10:30:17Z",
+    thumbnails: [
+      {
+        url: "https://i.ytimg.com/vi/mc0s-viF7q4/default.jpg",
+        width: 120,
+        height: 90,
+      },
+      {
+        url: "https://i.ytimg.com/vi/mc0s-viF7q4/mqdefault.jpg",
+        width: 320,
+        height: 180,
+      },
+    ],
+  },
+
 
   // Existing article mock data
   {

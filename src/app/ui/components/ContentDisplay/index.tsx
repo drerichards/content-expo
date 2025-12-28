@@ -6,18 +6,20 @@ type ContentDisplayProps = {
   item: ContentItem;
   embedHeight: string;
   isBookmarked: boolean;
-  isSideCollapsed: boolean;
+  isSideOpen: boolean;
   toggleSide: () => void;
   onToggleBookmark: () => void;
+  onMainPanelClose: () => void;
 };
 
 export default function ContentDisplay({
   item,
   embedHeight,
   isBookmarked,
-  isSideCollapsed,
+  isSideOpen,
   toggleSide,
   onToggleBookmark,
+  onMainPanelClose,
 }: ContentDisplayProps) {
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
 
@@ -28,15 +30,23 @@ export default function ContentDisplay({
 
   return (
     <main className={styles.detailPanel}>
+      <button
+        className={styles.closePanelButton}
+        onClick={onMainPanelClose}
+        title={"Close panel"}
+        aria-label={"Close panel"}
+      >
+        <span>x</span>
+      </button>
       <div className={styles.panelHeader}>
         <div className={styles.titleGroup}>
           <button
             className={styles.toggleButton}
             onClick={toggleSide}
-            title={isSideCollapsed ? "Expand panel" : "Collapse panel"}
-            aria-label={isSideCollapsed ? "Expand panel" : "Collapse panel"}
+            title={isSideOpen ? "Expand panel" : "Collapse panel"}
+            aria-label={isSideOpen ? "Expand panel" : "Collapse panel"}
           >
-            <span>{isSideCollapsed ? "❯" : "❮"}</span>
+            <span>{isSideOpen ? "❯" : "❮"}</span>
           </button>
           <h2 className={styles.title}>{item.title}</h2>
         </div>

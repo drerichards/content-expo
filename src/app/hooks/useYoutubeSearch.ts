@@ -25,13 +25,12 @@ export function useYoutubeSearch() {
 
             const normalizedItems: YoutubeSearchResult[] = (data.items ?? []).map(
                 (item) => {
-                    const thumbnails: YoutubeApiThumbnail[] = [];
+                    const snippet = item.snippet;
 
-                    const defaultThumb = item.snippet?.thumbnails?.default;
-                    if (defaultThumb) thumbnails.push(defaultThumb);
-
-                    const mediumThumb = item.snippet?.thumbnails?.medium;
-                    if (mediumThumb) thumbnails.push(mediumThumb);
+                    const thumbnails: YoutubeApiThumbnail[] = [
+                        snippet?.thumbnails?.default,
+                        snippet?.thumbnails?.medium,
+                    ].filter((t): t is YoutubeApiThumbnail => !!t);
 
                     const id =
                         typeof item.id === "string" ? item.id : item.id?.videoId ?? "";
@@ -39,11 +38,13 @@ export function useYoutubeSearch() {
                     return {
                         id,
                         type: "video",
-                        title: item.snippet?.title?.trim() ?? "",
-                        description: item.snippet?.description?.trim() ?? "",
-                        source: item.snippet?.channelTitle?.trim() ?? "YouTube",
+                        title: snippet?.title ?? "",
+                        channelId: snippet?.channelId ?? "",
+                        channelTitle: snippet?.channelTitle ?? "",
+                        description: snippet?.description ?? "",
+                        source: snippet?.channelTitle ?? "YouTube",
                         url: `https://www.youtube.com/watch?v=${id}`,
-                        publishedAt: item.snippet?.publishedAt ?? "",
+                        publishedAt: snippet?.publishedAt ?? "",
                         thumbnails,
                     };
                 },

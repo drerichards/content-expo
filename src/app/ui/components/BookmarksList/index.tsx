@@ -1,6 +1,6 @@
 import styles from "./BookmarksList.module.css";
 import type { Bookmark } from "@/app/types";
-import ListRow from "../ListRow/ListRow";
+import ListRow from "../YoutubeCard";
 
 type BookmarksListProps = {
   bookmarks: Bookmark[];

@@ -2,7 +2,7 @@ export type Bookmark = {
   id: string;
   provider: "youtube" | "web";
   providerId: string;
-  type: "video" | "article";
+  type: ContentType;
   title: string;
   source: string;
   url: string;
@@ -11,7 +11,7 @@ export type Bookmark = {
   description?: string;
 };
 
-type ContentType = "video" | "article";
+type ContentType = "video" | "article" | "playlist";
 
 export type ContentItem = {
   id: string;
@@ -27,6 +27,8 @@ export type YoutubeSearchResult = {
   id: string;
   type: "video";
   title: string;
+  channelId: string;
+  channelTitle?: string;
   description: string;
   source: string;
   url: string;
@@ -46,6 +48,7 @@ export type YoutubeApiItem = {
     title?: string;
     description?: string;
     channelTitle?: string;
+    channelId: string;
     publishedAt?: string;
     thumbnails?: {
       default?: YoutubeApiThumbnail;

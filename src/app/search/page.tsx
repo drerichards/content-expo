@@ -1,44 +1,49 @@
 "use client";
 
-import SearchBar from "@/app/ui/components/SearchBar/SearchBar";
+import SearchBar from "@/app/ui/components/SearchBar";
 import { useState } from "react";
 import { ContentItem } from "@/app/types";
 import { useBookmarks } from "@/app/hooks/useBookmarks";
-import type { Bookmark } from "@/app/types";
+import type { Bookmark, YoutubeSearchResult } from "@/app/types";
 import styles from "@/app/styles/layout/layout.module.css";
-import ContentDisplay from "@/app/ui/components/ContentDisplay/ContentDisplay";
-import Navbar from "@/app/ui/components/Navbar/Navbar";
-import LeftPanel from "@/app/ui/lib/LeftPanel/LeftPanel";
-import ResultsList from "@/app/ui/components/ResultsList/ResultsList";
-import BookmarksList from "@/app/ui/components/BookmarksList/BookmarksList";
-import FullPanel from "@/app/ui/lib/FullPanel/FullPanel";
-import PanelContainer from "@/app/ui/components/PanelContainer/PanelContainer";
-import SidePanel from "@/app/ui/components/SidePanel/SidePanel";
-import MainPanel from "@/app/ui/components/MainPanel/MainPanel";
-// import { useYoutubeSearch } from "@/app/hooks/useYoutubeSearch";
+import ContentDisplay from "@/app/ui/components/ContentDisplay";
+import Navbar from "@/app/ui/components/Navbar";
+import LeftPanel from "@/app/ui/lib/LeftPanel";
+import ResultsList from "@/app/ui/components/ResultsList";
+import BookmarksList from "@/app/ui/components/BookmarksList";
+import FullPanel from "@/app/ui/lib/FullPanel";
+import PanelContainer from "@/app/ui/components/PanelContainer";
+import SidePanel from "@/app/ui/components/SidePanel";
+import MainPanel from "@/app/ui/components/MainPanel";
+import { useYoutubeSearch } from "@/app/hooks/useYoutubeSearch";
 import { mockItems } from "@/app/data/mockData";
 
 export default function SearchPage() {
   const [selectedItem, setSelectedItem] = useState<ContentItem | null>(null);
-  const [isSideCollapsed, setIsSideCollapsed] = useState(false);
+  const [isSideOpen, setIsSideOpen] = useState(false);
   const [showBookmarks, setShowBookmarks] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
 
-  // const { youtubeSearchResults, isLoading, error, onYoutubeSearch } =
-  //   useYoutubeSearch();
+  // const {
+  //   youtubeSearchResults: results,
+  //   isLoading,
+  //   error,
+  //   onYoutubeSearch,
+  // } = useYoutubeSearch();
   const youtubeSearchResults = mockItems.filter(
-    (item) => item.type === "video",
+    (item): item is YoutubeSearchResult => item.type === "video",
   );
+  // console.log(results);
 
   const { bookmarks, isBookmarked, toggleBookmark } = useBookmarks();
-  const videos: ContentItem[] = youtubeSearchResults;
+  const videos: YoutubeSearchResult[] = youtubeSearchResults;
   const articles: ContentItem[] = mockItems.filter(
-    (item) => item.type === "article",
+    (item): item is ContentItem => item.type === "article",
   );
 
-  const toggleSide = () => setIsSideCollapsed((prev) => !prev);
+  const toggleSide = () => setIsSideOpen((prev) => !prev);
   const openBookmarks = () => {
-    setIsSideCollapsed(false);
+    setIsSideOpen(false);
     setShowBookmarks(true);
   };
   const closeBookmarks = () => setShowBookmarks(false);
@@ -101,11 +106,8 @@ export default function SearchPage() {
       )} */}
 
       {hasSearched && youtubeSearchResults.length > 0 && (
-        <PanelContainer
-          hasSelectedItem={!!selectedItem}
-          sideCollapsed={isSideCollapsed}
-        >
-          {!isSideCollapsed && (
+        <PanelContainer hasSelectedItem={!!selectedItem} sideOpen={isSideOpen}>
+          {!isSideOpen && (
             <SidePanel>
               <PanelComponent>
                 <div style={{ position: "relative" }}>
@@ -139,10 +141,14 @@ export default function SearchPage() {
             {selectedItem && (
               <ContentDisplay
                 item={selectedItem}
-                embedHeight={isSideCollapsed ? "80vh" : "65vh"}
+                embedHeight={isSideOpen ? "80vh" : "65vh"}
                 isBookmarked={isBookmarked(selectedItem.id)}
-                isSideCollapsed={isSideCollapsed}
+                isSideOpen={isSideOpen}
                 toggleSide={toggleSide}
+                onMainPanelClose={() => {
+                  setSelectedItem(null);
+                  setIsSideOpen(false);
+                }}
                 onToggleBookmark={() =>
                   toggleBookmark(toBookmark(selectedItem))
                 }
