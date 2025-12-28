@@ -2,12 +2,11 @@
 
 import SearchBar from "@/app/ui/components/SearchBar/SearchBar";
 import { useState } from "react";
-import { mockItems } from "../data/mockData";
 import { ContentItem } from "@/app/types";
 import { useBookmarks } from "@/app/hooks/useBookmarks";
 import type { Bookmark } from "@/app/types";
 import styles from "@/app/styles/layout/layout.module.css";
-import DetailPanel from "@/app/ui/components/DetailPanel/DetailPanel";
+import ContentDisplay from "@/app/ui/components/ContentDisplay/ContentDisplay";
 import Navbar from "@/app/ui/components/Navbar/Navbar";
 import LeftPanel from "@/app/ui/lib/LeftPanel/LeftPanel";
 import ResultsList from "@/app/ui/components/ResultsList/ResultsList";
@@ -16,38 +15,32 @@ import FullPanel from "@/app/ui/lib/FullPanel/FullPanel";
 import PanelContainer from "@/app/ui/components/PanelContainer/PanelContainer";
 import SidePanel from "@/app/ui/components/SidePanel/SidePanel";
 import MainPanel from "@/app/ui/components/MainPanel/MainPanel";
-
-function handleSearch(
-  query: string,
-  setResults: (items: ContentItem[]) => void,
-  setSelectedItem: (item: ContentItem | null) => void,
-) {
-  const normalizedQuery = query.toLowerCase();
-  const filtered = mockItems.filter((item) => {
-    const title = item.title.toLowerCase();
-    const description = item.description.toLowerCase();
-    return (
-      title.includes(normalizedQuery) || description.includes(normalizedQuery)
-    );
-  });
-  setResults(filtered);
-  setSelectedItem(null);
-}
+// import { useYoutubeSearch } from "@/app/hooks/useYoutubeSearch";
+import { mockItems } from "@/app/data/mockData";
 
 export default function SearchPage() {
-  const [results, setResults] = useState<ContentItem[]>([]);
   const [selectedItem, setSelectedItem] = useState<ContentItem | null>(null);
   const [isSideCollapsed, setIsSideCollapsed] = useState(false);
   const [showBookmarks, setShowBookmarks] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
 
-  const { bookmarks, isBookmarked, toggleBookmark } = useBookmarks();
+  // const { youtubeSearchResults, isLoading, error, onYoutubeSearch } =
+  //   useYoutubeSearch();
+  const youtubeSearchResults = mockItems.filter(
+    (item) => item.type === "video",
+  );
 
-  const videos = results.filter((i) => i.type === "video");
-  const articles = results.filter((i) => i.type === "article");
+  const { bookmarks, isBookmarked, toggleBookmark } = useBookmarks();
+  const videos: ContentItem[] = youtubeSearchResults;
+  const articles: ContentItem[] = mockItems.filter(
+    (item) => item.type === "article",
+  );
 
   const toggleSide = () => setIsSideCollapsed((prev) => !prev);
-  const openBookmarks = () => setShowBookmarks(true);
+  const openBookmarks = () => {
+    setIsSideCollapsed(false);
+    setShowBookmarks(true);
+  };
   const closeBookmarks = () => setShowBookmarks(false);
 
   // todo: add clear results button
@@ -89,7 +82,8 @@ export default function SearchPage() {
       <Navbar onOpenBookmarks={openBookmarks} />
       <SearchBar
         onSearch={(query) => {
-          handleSearch(query, setResults, setSelectedItem);
+          // onYoutubeSearch(query);
+          setSelectedItem(null);
           setHasSearched(true);
         }}
       />
@@ -100,13 +94,13 @@ export default function SearchPage() {
         </p>
       )}
 
-      {hasSearched && results.length === 0 && (
+      {/* {hasSearched && youtubeSearchResults.length === 0 && (
         <p className={styles.noResults}>
           No results found. Try refining your query.
         </p>
-      )}
+      )} */}
 
-      {hasSearched && results.length > 0 && (
+      {hasSearched && youtubeSearchResults.length > 0 && (
         <PanelContainer
           hasSelectedItem={!!selectedItem}
           sideCollapsed={isSideCollapsed}
@@ -116,7 +110,7 @@ export default function SearchPage() {
               <PanelComponent>
                 <div style={{ position: "relative" }}>
                   <ResultsList
-                    results={results}
+                    results={!!youtubeSearchResults}
                     selectedItem={selectedItem}
                     setSelectedItem={setSelectedItem}
                     isBookmarked={isBookmarked}
@@ -143,7 +137,7 @@ export default function SearchPage() {
           )}
           <MainPanel>
             {selectedItem && (
-              <DetailPanel
+              <ContentDisplay
                 item={selectedItem}
                 embedHeight={isSideCollapsed ? "80vh" : "65vh"}
                 isBookmarked={isBookmarked(selectedItem.id)}

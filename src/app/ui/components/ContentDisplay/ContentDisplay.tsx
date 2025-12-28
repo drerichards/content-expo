@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { ContentItem } from "@/app/types";
-import styles from "./DetailPanel.module.css";
+import styles from "./ContentDisplay.module.css";
 
-type DetailPanelProps = {
+type ContentDisplayProps = {
   item: ContentItem;
   embedHeight: string;
   isBookmarked: boolean;
@@ -11,14 +11,14 @@ type DetailPanelProps = {
   onToggleBookmark: () => void;
 };
 
-export default function DetailPanel({
+export default function ContentDisplay({
   item,
   embedHeight,
   isBookmarked,
   isSideCollapsed,
   toggleSide,
   onToggleBookmark,
-}: DetailPanelProps) {
+}: ContentDisplayProps) {
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
 
   const isVideo = item.type === "video";

@@ -3,7 +3,7 @@ import { Bookmark, ContentItem } from "@/app/types";
 import ListRow from "../ListRow/ListRow";
 
 type ResultsListProps = {
-  results: ContentItem[];
+  results: boolean;
   selectedItem: ContentItem | null;
   setSelectedItem: (item: ContentItem) => void;
   isBookmarked: (id: string) => boolean;
@@ -25,7 +25,7 @@ export default function ResultsList({
 }: ResultsListProps) {
   return (
     <div>
-      {results.length > 0 && (
+      {results && (
         <div
           className={selectedItem ? styles.resultsStacked : styles.resultsGrid}
         >
