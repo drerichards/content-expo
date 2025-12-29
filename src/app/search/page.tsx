@@ -35,7 +35,8 @@ export default function SearchPage() {
   );
   // console.log(results);
 
-  const { bookmarks, isBookmarked, toggleBookmark } = useBookmarks();
+  const { bookmarks, isBookmarked, toggleBookmark, refreshBookmarks } =
+    useBookmarks();
   const videos: YoutubeSearchResult[] = youtubeSearchResults;
   const articles: ContentItem[] = mockItems.filter(
     (item): item is ContentItem => item.type === "article",
@@ -43,6 +44,16 @@ export default function SearchPage() {
 
   const toggleSide = () => setIsSideOpen((prev) => !prev);
   const openBookmarks = () => {
+    console.log(
+      "[SearchPage] openBookmarks before refresh: length=",
+      bookmarks.length,
+    );
+    // Ensure bookmarks are freshly loaded from localStorage
+    refreshBookmarks();
+    console.log(
+      "[SearchPage] openBookmarks after refresh (same render): length=",
+      bookmarks.length,
+    );
     setIsSideOpen(false);
     setShowBookmarks(true);
   };
@@ -89,44 +100,44 @@ export default function SearchPage() {
         onSearch={(query) => {
           // onYoutubeSearch(query);
           setSelectedItem(null);
+          setShowBookmarks(false);
           setHasSearched(true);
         }}
       />
 
-      {!hasSearched && (
-        <p className={styles.searchPrompt}>
-          Search for a topic to see videos and articles.
-        </p>
-      )}
-
-      {/* {hasSearched && youtubeSearchResults.length === 0 && (
+      {hasSearched && youtubeSearchResults.length === 0 && (
         <p className={styles.noResults}>
           No results found. Try refining your query.
         </p>
-      )} */}
+      )}
 
-      {hasSearched && youtubeSearchResults.length > 0 && (
+      {(hasSearched && youtubeSearchResults.length > 0) || showBookmarks ? (
         <PanelContainer hasSelectedItem={!!selectedItem} sideOpen={isSideOpen}>
           {!isSideOpen && (
             <SidePanel>
               <PanelComponent>
                 <div style={{ position: "relative" }}>
-                  <ResultsList
-                    results={!!youtubeSearchResults}
-                    selectedItem={selectedItem}
-                    setSelectedItem={setSelectedItem}
-                    isBookmarked={isBookmarked}
-                    toggleBookmark={toggleBookmark}
-                    toBookmark={toBookmark}
-                    videos={videos}
-                    articles={articles}
-                  />
+                  {hasSearched &&
+                    youtubeSearchResults.length > 0 &&
+                    !showBookmarks && (
+                      <ResultsList
+                        results={!!youtubeSearchResults}
+                        selectedItem={selectedItem}
+                        setSelectedItem={setSelectedItem}
+                        isBookmarked={isBookmarked}
+                        toggleBookmark={toggleBookmark}
+                        toBookmark={toBookmark}
+                        videos={videos}
+                        articles={articles}
+                      />
+                    )}
 
                   {showBookmarks && (
                     <BookmarksList
                       bookmarks={bookmarks}
                       isBookmarked={isBookmarked}
                       toggleBookmark={toggleBookmark}
+                      hasSearched={hasSearched}
                       onClose={closeBookmarks}
                       onSelectBookmark={(bookmark) =>
                         setSelectedItem(fromBookmark(bookmark))
@@ -156,7 +167,7 @@ export default function SearchPage() {
             )}
           </MainPanel>
         </PanelContainer>
-      )}
+      ) : null}
     </main>
   );
 }

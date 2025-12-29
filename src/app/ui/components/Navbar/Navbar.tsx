@@ -10,7 +10,7 @@ export default function Navbar({ onOpenBookmarks }: NavbarProps) {
       <h1 className={styles.title}>Kernel</h1>
       <ul className={styles.navItems}>
         {/* TODO: empty icon for empty bookmarks or full icon with badge */}
-        <li className={styles.navItem}>
+        <li>
           <button type="button" onClick={onOpenBookmarks}>
             ★ Bookmarks
           </button>

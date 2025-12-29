@@ -24,8 +24,14 @@ export class BookmarkService {
       const raw = window.localStorage.getItem(STORAGE_KEY);
       if (!raw) return [];
       const parsed = JSON.parse(raw) as Bookmark[];
-      return Array.isArray(parsed) ? parsed : [];
-    } catch {
+      if (!Array.isArray(parsed)) {
+        console.error("[BookmarkService] Stored value is not an array", parsed);
+        return [];
+      }
+      console.log("[BookmarkService] Loaded bookmarks from localStorage:", parsed.length);
+      return parsed;
+    } catch (error) {
+      console.error("[BookmarkService] Failed to parse bookmarks from localStorage", error);
       return [];
     }
   }
