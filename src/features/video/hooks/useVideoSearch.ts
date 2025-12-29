@@ -3,17 +3,17 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import type {
-    YoutubeSearchResult,
-    YoutubeApiSearchResponse,
-    YoutubeApiThumbnail,
-} from "@/app/types";
+    VideoSearchResult,
+    VideoApiSearchResponse,
+    VideoApiThumbnail,
+} from "@/features/video/types";
 
-export function useYoutubeSearch() {
+export function useVideoSearch() {
     const [searchQuery, setSearchQuery] = useState("");
 
     const normalizedQuery = searchQuery.trim().toLowerCase();
 
-    const youtubeVideoSearchQuery = useQuery<{ items: YoutubeSearchResult[] }>({
+    const videoSearchQuery = useQuery<{ items: VideoSearchResult[] }>({
         queryKey: ["search", normalizedQuery],
         queryFn: async () => {
             if (!normalizedQuery) return { items: [] };
@@ -21,16 +21,16 @@ export function useYoutubeSearch() {
             const res = await fetch(
                 `/api/video?q=${encodeURIComponent(normalizedQuery)}`,
             );
-            const data = (await res.json()) as YoutubeApiSearchResponse;
+            const data = (await res.json()) as VideoApiSearchResponse;
 
-            const normalizedItems: YoutubeSearchResult[] = (data.items ?? []).map(
+            const normalizedItems: VideoSearchResult[] = (data.items ?? []).map(
                 (item) => {
                     const snippet = item.snippet;
 
-                    const thumbnails: YoutubeApiThumbnail[] = [
+                    const thumbnails: VideoApiThumbnail[] = [
                         snippet?.thumbnails?.default,
                         snippet?.thumbnails?.medium,
-                    ].filter((t): t is YoutubeApiThumbnail => !!t);
+                    ].filter((t): t is VideoApiThumbnail => !!t);
 
                     const id =
                         typeof item.id === "string" ? item.id : item.id?.videoId ?? "";
@@ -55,12 +55,12 @@ export function useYoutubeSearch() {
         enabled: normalizedQuery.length > 0,
     });
 
-    const onYoutubeSearch = (q: string) => setSearchQuery(q);
+    const onVideoSearch = (q: string) => setSearchQuery(q);
 
     return {
-        youtubeSearchResults: youtubeVideoSearchQuery.data?.items ?? [],
-        isLoading: youtubeVideoSearchQuery.isLoading,
-        error: youtubeVideoSearchQuery.error,
-        onYoutubeSearch,
+        videoSearchResults: videoSearchQuery.data?.items ?? [],
+        isLoading: videoSearchQuery.isLoading,
+        error: videoSearchQuery.error,
+        onVideoSearch,
     };
 }

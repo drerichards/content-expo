@@ -1,5 +1,5 @@
 import styles from "./BookmarksList.module.css";
-import type { Bookmark } from "@/app/types";
+import type { Bookmark } from "@/features/video/types";
 import ArticleCard from "@/features/article/components/ArticleCard";
 
 type BookmarksListProps = {
@@ -19,10 +19,6 @@ export default function BookmarksList({
   onClose,
   onSelectBookmark,
 }: BookmarksListProps) {
-  console.log(
-    "[BookmarksList] render with bookmarks length:",
-    bookmarks.length,
-  );
   return (
     <div className={styles.container}>
       {hasSearched && (

@@ -1,14 +1,15 @@
 export type Bookmark = {
-  id: string;
-  provider: "youtube" | "web";
-  providerId: string;
-  type: ContentType;
-  title: string;
-  source: string;
-  url: string;
-  savedAt: string;
-  publishedAt?: string;
-  description?: string;
+   id: string;
+   provider: "video" | "web";
+   providerId: string;
+   type: ContentType;
+   title: string;
+   source: string;
+   url: string;
+   savedAt: string;
+   // For bookmarks we always store a description and published date
+   publishedAt: string;
+   description: string;
 };
 
 type ContentType = "video" | "article" | "playlist";
@@ -23,7 +24,7 @@ export type ContentItem = {
   publishedAt: string;
 };
 
-export type YoutubeSearchResult = {
+export type VideoSearchResult = {
   id: string;
   type: "video";
   title: string;
@@ -33,16 +34,16 @@ export type YoutubeSearchResult = {
   source: string;
   url: string;
   publishedAt: string;
-  thumbnails: YoutubeApiThumbnail[];
+  thumbnails: VideoApiThumbnail[];
 };
 
-export type YoutubeApiThumbnail = {
+export type VideoApiThumbnail = {
   url?: string;
   width?: number;
   height?: number;
 };
 
-export type YoutubeApiItem = {
+export type VideoApiItem = {
   id?: { videoId?: string } | string;
   snippet?: {
     title?: string;
@@ -51,12 +52,12 @@ export type YoutubeApiItem = {
     channelId: string;
     publishedAt?: string;
     thumbnails?: {
-      default?: YoutubeApiThumbnail;
-      medium?: YoutubeApiThumbnail;
+      default?: VideoApiThumbnail;
+      medium?: VideoApiThumbnail;
     };
   };
 };
 
-export type YoutubeApiSearchResponse = {
-  items?: YoutubeApiItem[];
+export type VideoApiSearchResponse = {
+  items?: VideoApiItem[];
 };

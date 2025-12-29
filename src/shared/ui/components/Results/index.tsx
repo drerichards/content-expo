@@ -1,6 +1,10 @@
 import styles from "./ResultsList.module.css";
-import type { Bookmark, ContentItem, YoutubeSearchResult } from "@/app/types";
-import YoutubeCard from "@/features/video/components/VideoCard";
+import type {
+  Bookmark,
+  ContentItem,
+  VideoSearchResult,
+} from "@/features/video/types";
+import VideoCard from "@/features/video/components/VideoCard";
 import ArticleCard from "@/features/article/components/ArticleCard";
 
 type ResultsListProps = {
@@ -10,7 +14,7 @@ type ResultsListProps = {
   isBookmarked: (id: string) => boolean;
   toggleBookmark: (bookmark: Bookmark) => void;
   toBookmark: (item: ContentItem) => Bookmark;
-  videos: YoutubeSearchResult[];
+  videos: VideoSearchResult[];
   articles: ContentItem[];
 };
 
@@ -34,7 +38,7 @@ export default function ResultsList({
             <h2>VIDEOS</h2>
             {videos.map((v) => {
               return (
-                <YoutubeCard
+                <VideoCard
                   key={v.id}
                   video={v}
                   isBookmarked={isBookmarked(v.id)}

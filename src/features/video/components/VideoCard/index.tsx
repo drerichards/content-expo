@@ -1,20 +1,20 @@
 import Image from "next/image";
-import styles from "./YoutubeCard.module.css";
-import { YoutubeSearchResult } from "@/app/types";
+import styles from "./VideoCard.module.css";
+import { VideoSearchResult } from "@/features/video/types";
 
-type YoutubeCardProps = {
-  video: YoutubeSearchResult;
+type VideoCardProps = {
+  video: VideoSearchResult;
   isBookmarked: boolean;
   onToggleBookmark: () => void;
   onClick: () => void;
 };
 
-export default function YoutubeCard({
+export default function VideoCard({
   video: { title, source, publishedAt, thumbnails },
   isBookmarked,
   onToggleBookmark,
   onClick,
-}: YoutubeCardProps) {
+}: VideoCardProps) {
   return (
     <div
       className={styles.row}

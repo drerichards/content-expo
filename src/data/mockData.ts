@@ -1,6 +1,6 @@
-import { ContentItem, YoutubeSearchResult } from "../app/types";
+import { ContentItem, VideoSearchResult } from "../features/video/types";
 
-export const mockItems: (ContentItem | YoutubeSearchResult)[] = [
+export const mockItems: (ContentItem | VideoSearchResult)[] = [
   {
     id: "lkIFF4maKMU",
     type: "video",

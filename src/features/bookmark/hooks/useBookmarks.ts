@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import type { Bookmark } from "@/app/types";
+import type { Bookmark } from "@/features/video/types";
 import { bookmarkService } from "../api/bookmarkService";
 
 export function useBookmarks() {

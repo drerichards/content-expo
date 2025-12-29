@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { ContentItem } from "@/app/types";
-import styles from "./ContentDisplay.module.css";
+import { ContentItem } from "@/features/video/types";
+import styles from "./VideoView.module.css";
 
-type ContentDisplayProps = {
+type VideoViewProps = {
   item: ContentItem;
   embedHeight: string;
   isBookmarked: boolean;
@@ -12,7 +12,7 @@ type ContentDisplayProps = {
   onMainPanelClose: () => void;
 };
 
-export default function ContentDisplay({
+export default function VideoView({
   item,
   embedHeight,
   isBookmarked,
@@ -20,7 +20,7 @@ export default function ContentDisplay({
   toggleSide,
   onToggleBookmark,
   onMainPanelClose,
-}: ContentDisplayProps) {
+}: VideoViewProps) {
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
 
   const isVideo = item.type === "video";

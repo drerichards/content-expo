@@ -1,4 +1,4 @@
-import type { Bookmark } from "@/app/types";
+import type { Bookmark } from "@/features/video/types";
 
 const STORAGE_KEY = "see_bookmarks_v1";
 
