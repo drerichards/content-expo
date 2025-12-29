@@ -12,7 +12,7 @@ type VideoViewProps = {
   onMainPanelClose: () => void;
 };
 
-export default function VideoView({
+const VideoView = ({
   item,
   embedHeight,
   isBookmarked,
@@ -20,7 +20,7 @@ export default function VideoView({
   toggleSide,
   onToggleBookmark,
   onMainPanelClose,
-}: VideoViewProps) {
+}: VideoViewProps) => {
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
 
   const isVideo = item.type === "video";
@@ -110,4 +110,6 @@ export default function VideoView({
       </div>
     </main>
   );
-}
+};
+
+export default VideoView;

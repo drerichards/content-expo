@@ -18,7 +18,7 @@ type ResultsListProps = {
   articles: ContentItem[];
 };
 
-export default function ResultsList({
+const ResultsList = ({
   results,
   selectedItem,
   setSelectedItem,
@@ -27,7 +27,7 @@ export default function ResultsList({
   toBookmark,
   videos,
   articles,
-}: ResultsListProps) {
+}: ResultsListProps) => {
   return (
     <div>
       {results && (
@@ -66,4 +66,6 @@ export default function ResultsList({
       )}
     </div>
   );
-}
+};
+
+export default ResultsList;

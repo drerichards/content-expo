@@ -1,4 +1,4 @@
-import type { ThreadItem } from "@/new/src/app/types";
+import type { ThreadItem } from "@/app/fakeTypes";
 
 export async function searchThreads(query: string): Promise<ThreadItem[]> {
     // TODO: implement real API call

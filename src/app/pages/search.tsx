@@ -15,7 +15,7 @@ import styles from "@/shared/styles/layout.module.css";
 import { useSearchPage } from "./hooks/useSearchPage";
 import { toBookmark } from "./utils";
 
-export default function ContentSearchPage() {
+const ContentSearchPage = () => {
   const {
     selectedItem,
     isSideOpen,
@@ -102,4 +102,6 @@ export default function ContentSearchPage() {
       ) : null}
     </main>
   );
-}
+};
+
+export default ContentSearchPage;

@@ -1,4 +1,6 @@
-import type { ArticleItem } from "@/new/src/app/types";
+type ArticleItem = {
+    id: string;
+}
 
 export async function searchArticles(query: string): Promise<ArticleItem[]> {
     // TODO: implement real API call

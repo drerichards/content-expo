@@ -1,7 +1,7 @@
 "use client";
 
-import type { StackItem } from "@/new/src/app/types";
-import { CardBase } from "@/new/src/shared/ui/composites/CardBase";
+import type { StackItem } from "@/app/fakeTypes";
+import { CardBase } from "@/shared/ui/components/CardBase";
 
 type StackCardProps = {
   stack: StackItem;

@@ -5,7 +5,7 @@ import { useBookmarks } from "@/features/bookmark/hooks/useBookmarks";
 import { mockItems } from "@/data/mockData";
 import { fromBookmark } from "../utils";
 
-export function useSearchPage() {
+export const useSearchPage = () => {
     const [selectedItem, setSelectedItem] = useState<ContentItem | null>(null);
     const [isSideOpen, setIsSideOpen] = useState(false);
     const [showBookmarks, setShowBookmarks] = useState(false);
@@ -20,39 +20,39 @@ export function useSearchPage() {
         (item): item is ContentItem => item.type === "article"
     );
 
-    function onSearch(query: string) {
+    const onSearch = (query: string) => {
         onVideoSearch(query);
         setSelectedItem(null);
         setShowBookmarks(false);
         setHasSearched(true);
-    }
+    };
 
-    function onSelectItem(item: ContentItem | Bookmark) {
+    const onSelectItem = (item: ContentItem | Bookmark) => {
         if ("savedAt" in item) {
             setSelectedItem(fromBookmark(item));
         } else {
             setSelectedItem(item);
         }
-    }
+    };
 
-    function onToggleSide() {
+    const onToggleSide = () => {
         setIsSideOpen((prev) => !prev);
-    }
+    };
 
-    function onOpenBookmarks() {
+    const onOpenBookmarks = () => {
         refreshBookmarks();
         setIsSideOpen(false);
         setShowBookmarks(true);
-    }
+    };
 
-    function onCloseBookmarks() {
+    const onCloseBookmarks = () => {
         setShowBookmarks(false);
-    }
+    };
 
-    function onCloseMainPanel() {
+    const onCloseMainPanel = () => {
         setSelectedItem(null);
         setIsSideOpen(false);
-    }
+    };
 
     return {
         selectedItem,
@@ -72,4 +72,4 @@ export function useSearchPage() {
         onCloseBookmarks,
         onCloseMainPanel,
     };
-}
+};

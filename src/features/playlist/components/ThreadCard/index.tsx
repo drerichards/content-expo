@@ -1,7 +1,7 @@
 "use client";
 
-import type { ThreadItem } from "@/new/src/app/types";
-import { CardBase } from "@/new/src/shared/ui/composites/CardBase";
+import type { ThreadItem } from "@/app/fakeTypes";
+import { CardBase } from "@/shared/ui/components/CardBase";
 
 type ThreadCardProps = {
   thread: ThreadItem;
@@ -9,7 +9,7 @@ type ThreadCardProps = {
 
 export function ThreadCard({ thread }: ThreadCardProps) {
   return (
-    <CardBase title={thread.title} subtitle={thread.source}>
+    <CardBase title={thread.id} subtitle="Thread Subtitle">
       {/* TODO: thread-specific content */}
     </CardBase>
   );

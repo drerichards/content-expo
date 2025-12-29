@@ -1,6 +1,6 @@
 import { Bookmark, ContentItem } from "@/features/video/types";
 
-export function toBookmark(item: ContentItem): Bookmark {
+export const toBookmark = (item: ContentItem): Bookmark => {
   return {
     id: item.id,
     provider: item.type === "video" ? "video" : "web",
@@ -13,9 +13,9 @@ export function toBookmark(item: ContentItem): Bookmark {
     description: item.description,
     savedAt: new Date().toISOString(),
   };
-}
+};
 
-export function fromBookmark(bookmark: Bookmark): ContentItem {
+export const fromBookmark = (bookmark: Bookmark): ContentItem => {
   return {
     id: bookmark.id,
     type: bookmark.type,
@@ -25,4 +25,4 @@ export function fromBookmark(bookmark: Bookmark): ContentItem {
     url: bookmark.url,
     publishedAt: bookmark.publishedAt ?? "",
   };
-}
+};

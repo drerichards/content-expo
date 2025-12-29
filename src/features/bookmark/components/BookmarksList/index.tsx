@@ -11,14 +11,14 @@ type BookmarksListProps = {
   onSelectBookmark: (bookmark: Bookmark) => void;
 };
 
-export default function BookmarksList({
+const BookmarksList = ({
   bookmarks,
   isBookmarked,
   toggleBookmark,
   hasSearched,
   onClose,
   onSelectBookmark,
-}: BookmarksListProps) {
+}: BookmarksListProps) => {
   return (
     <div className={styles.container}>
       {hasSearched && (
@@ -48,4 +48,6 @@ export default function BookmarksList({
       </div>
     </div>
   );
-}
+};
+
+export default BookmarksList;

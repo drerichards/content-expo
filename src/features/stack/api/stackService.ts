@@ -1,4 +1,4 @@
-import type { StackItem } from "@/new/src/app/types";
+import type { StackItem } from "@/app/fakeTypes";
 
 export async function searchStacks(query: string): Promise<StackItem[]> {
     // TODO: implement real API call

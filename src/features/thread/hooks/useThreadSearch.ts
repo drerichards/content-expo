@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { ThreadItem } from "@/new/src/app/types";
+import type { ThreadItem } from "@/app/fakeTypes";
 import { searchThreads } from "../api/threadService";
 
 export function useThreadSearch() {
@@ -15,6 +15,7 @@ export function useThreadSearch() {
         try {
             const data = await searchThreads(query);
             setResults(data);
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (e) {
             setError("Failed to search threads");
         } finally {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { SnippetItem } from "@/new/src/app/types";
+import type { SnippetItem } from "@/app/fakeTypes";
 import { searchSnippets } from "../api/snippetService";
 
 export function useSnippetSearch() {

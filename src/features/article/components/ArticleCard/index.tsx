@@ -8,13 +8,13 @@ type ArticleCardProps = {
   onToggleBookmark: () => void;
 };
 
-export default function ArticleCard({
+const ArticleCard = ({
   title,
   source,
   isBookmarked,
   onClick,
   onToggleBookmark,
-}: ArticleCardProps) {
+}: ArticleCardProps) => {
   return (
     <div
       className={styles.row}
@@ -39,4 +39,6 @@ export default function ArticleCard({
       </button>
     </div>
   );
-}
+};
+
+export default ArticleCard;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { StackItem } from "@/new/src/app/types";
+import type { StackItem } from "@/app/fakeTypes";
 import { searchStacks } from "../api/stackService";
 
 export function useStackSearch() {
@@ -15,6 +15,7 @@ export function useStackSearch() {
         try {
             const data = await searchStacks(query);
             setResults(data);
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (e) {
             setError("Failed to search stack results");
         } finally {
