@@ -5,18 +5,22 @@ import type { Bookmark } from "@/app/types";
 import { bookmarkService } from "@/app/services/bookmarkService";
 
 export function useBookmarks() {
-  const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
+  const [bookmarks, setBookmarks] = useState<Bookmark[]>(() => {
+    if (typeof window === "undefined") return [];
+    return bookmarkService.getAll();
+  });
 
   // Hydrate bookmarks from localStorage on the client after mount
-  useEffect(() => {
-    refreshBookmarks();
-  }, []);
 
   function refreshBookmarks() {
     const stored = bookmarkService.getAll();
     console.log("[useBookmarks] refreshBookmarks loaded:", stored.length);
     setBookmarks(stored);
   }
+
+  // useEffect(() => {
+  //   refreshBookmarks();
+  // }, []);
 
   useEffect(() => {
     console.log("[useBookmarks] bookmarks state updated:", bookmarks.length);

@@ -15,7 +15,7 @@ import FullPanel from "@/app/ui/lib/FullPanel";
 import PanelContainer from "@/app/ui/components/PanelContainer";
 import SidePanel from "@/app/ui/components/SidePanel";
 import MainPanel from "@/app/ui/components/MainPanel";
-import { useYoutubeSearch } from "@/app/hooks/useYoutubeSearch";
+// import { useYoutubeSearch } from "@/app/hooks/useYoutubeSearch";
 import { mockItems } from "@/app/data/mockData";
 
 export default function SearchPage() {
@@ -44,16 +44,7 @@ export default function SearchPage() {
 
   const toggleSide = () => setIsSideOpen((prev) => !prev);
   const openBookmarks = () => {
-    console.log(
-      "[SearchPage] openBookmarks before refresh: length=",
-      bookmarks.length,
-    );
-    // Ensure bookmarks are freshly loaded from localStorage
     refreshBookmarks();
-    console.log(
-      "[SearchPage] openBookmarks after refresh (same render): length=",
-      bookmarks.length,
-    );
     setIsSideOpen(false);
     setShowBookmarks(true);
   };
@@ -97,7 +88,8 @@ export default function SearchPage() {
     >
       <Navbar onOpenBookmarks={openBookmarks} />
       <SearchBar
-        onSearch={(query) => {
+        onSearch={() => {
+          // onSearch={(query) => {
           // onYoutubeSearch(query);
           setSelectedItem(null);
           setShowBookmarks(false);

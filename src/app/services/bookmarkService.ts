@@ -1,5 +1,4 @@
 import type { Bookmark } from "@/app/types";
-import { log } from "console";
 
 const STORAGE_KEY = "see_bookmarks_v1";
 
