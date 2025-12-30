@@ -9,12 +9,12 @@ type VideoCardProps = {
   onClick: () => void;
 };
 
-export default function VideoCard({
+const VideoCard = ({
   video: { title, source, publishedAt, thumbnails },
   isBookmarked,
   onToggleBookmark,
   onClick,
-}: VideoCardProps) {
+}: VideoCardProps) => {
   return (
     <div
       className={styles.row}
@@ -56,4 +56,6 @@ export default function VideoCard({
       </button>
     </div>
   );
-}
+};
+
+export default VideoCard;
