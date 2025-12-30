@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ContentItem } from "@/features/video/types";
+import { ContentItem } from "@/types";
 
 export function useContentSearch() {
     const [searchQuery, setSearchQuery] = useState("");

@@ -1,7 +1,21 @@
-import type { VideoItem } from "@/app/fakeTypes";
+import { VideoSearchResult, VideoApiSearchResponse } from "@/types";
+import { mapVideoApiItemsToSearchResults } from "../mappers";
 
-export async function searchVideos(query: string): Promise<VideoItem[]> {
-    // TODO: implement real API call
-    console.log("searchVideos", query);
-    return [];
-}
+export const searchVideos = async (
+    query: string,
+): Promise<VideoSearchResult[]> => {
+    const normalizedQuery = query.trim().toLowerCase();
+    if (!normalizedQuery) return [];
+
+    const response = await fetch(
+        `/api/video?q=${encodeURIComponent(normalizedQuery)}`,
+    );
+
+    if (!response.ok) {
+        throw new Error("Failed to search videos");
+    }
+
+    const data = (await response.json()) as VideoApiSearchResponse;
+
+    return mapVideoApiItemsToSearchResults(data.items);
+};

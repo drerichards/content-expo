@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ContentItem } from "@/features/video/types";
+import { ContentItem } from "@/types";
 import styles from "./VideoView.module.css";
 
 type VideoViewProps = {

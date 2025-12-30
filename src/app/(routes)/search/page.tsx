@@ -1,5 +1,5 @@
-import ContentSearchPage from "@/app/pages/search";
+import SearchPageUI from "@/interface/search";
 
 export default function SearchPage() {
-  return <ContentSearchPage />;
+  return <SearchPageUI />;
 }

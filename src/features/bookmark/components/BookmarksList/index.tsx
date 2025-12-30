@@ -1,5 +1,5 @@
 import styles from "./BookmarksList.module.css";
-import type { Bookmark } from "@/features/video/types";
+import type { Bookmark } from "@/types";
 import ArticleCard from "@/features/article/components/ArticleCard";
 
 type BookmarksListProps = {

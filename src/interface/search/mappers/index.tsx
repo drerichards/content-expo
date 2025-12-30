@@ -1,6 +1,6 @@
-import { Bookmark, ContentItem } from "@/features/video/types";
+import { Bookmark, ContentItem } from "@/types";
 
-export const toBookmark = (item: ContentItem): Bookmark => {
+export const mapContentItemToBookmark = (item: ContentItem): Bookmark => {
   return {
     id: item.id,
     provider: item.type === "video" ? "video" : "web",
@@ -15,7 +15,7 @@ export const toBookmark = (item: ContentItem): Bookmark => {
   };
 };
 
-export const fromBookmark = (bookmark: Bookmark): ContentItem => {
+export const mapBookmarkToContentItem = (bookmark: Bookmark): ContentItem => {
   return {
     id: bookmark.id,
     type: bookmark.type,

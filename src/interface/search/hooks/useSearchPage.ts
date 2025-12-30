@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { ContentItem, VideoSearchResult, Bookmark } from "@/features/video/types";
+import { ContentItem, VideoSearchResult, Bookmark } from "@/types";
 import { useVideoSearch } from "@/features/video/hooks/useVideoSearch";
 import { useBookmarks } from "@/features/bookmark/hooks/useBookmarks";
 import { mockItems } from "@/data/mockData";
-import { fromBookmark } from "../utils";
+import { mapBookmarkToContentItem } from "../mappers";
 
 export const useSearchPage = () => {
     const [selectedItem, setSelectedItem] = useState<ContentItem | null>(null);
@@ -20,56 +20,69 @@ export const useSearchPage = () => {
         (item): item is ContentItem => item.type === "article"
     );
 
-    const onSearch = (query: string) => {
+    const handleSearchSubmit = (query: string) => {
         onVideoSearch(query);
         setSelectedItem(null);
         setShowBookmarks(false);
         setHasSearched(true);
     };
 
-    const onSelectItem = (item: ContentItem | Bookmark) => {
+    const handleResultItemSelect = (item: ContentItem | Bookmark) => {
         if ("savedAt" in item) {
-            setSelectedItem(fromBookmark(item));
+            setSelectedItem(mapBookmarkToContentItem(item));
         } else {
             setSelectedItem(item);
         }
     };
 
-    const onToggleSide = () => {
+    const handleDetailSidePanelToggle = () => {
         setIsSideOpen((prev) => !prev);
     };
 
-    const onOpenBookmarks = () => {
+    const handleBookmarksOpen = () => {
         refreshBookmarks();
         setIsSideOpen(false);
         setShowBookmarks(true);
     };
 
-    const onCloseBookmarks = () => {
+    const handleBookmarksClose = () => {
         setShowBookmarks(false);
     };
 
-    const onCloseMainPanel = () => {
+    const handleDetailPanelClose = () => {
         setSelectedItem(null);
         setIsSideOpen(false);
     };
 
     return {
-        selectedItem,
-        isSideOpen,
-        showBookmarks,
-        hasSearched,
-        videoSearchResults,
-        videos,
-        articles,
-        bookmarks,
-        isBookmarked,
-        toggleBookmark,
-        onSearch,
-        onSelectItem,
-        onToggleSide,
-        onOpenBookmarks,
-        onCloseBookmarks,
-        onCloseMainPanel,
+        layoutProps: {
+            hasSelectedItem: !!selectedItem,
+        },
+        headerProps: {
+            onSearch: handleSearchSubmit,
+            onOpenBookmarks: handleBookmarksOpen,
+        },
+        resultsPanelProps: {
+            hasSearched,
+            showBookmarks,
+            isSideOpen,
+            selectedItem,
+            videoSearchResults,
+            videos,
+            articles,
+            bookmarks,
+            isBookmarked,
+            toggleBookmark,
+            onSelectItem: handleResultItemSelect,
+            onCloseBookmarks: handleBookmarksClose,
+        },
+        detailPanelProps: {
+            selectedItem,
+            isSideOpen,
+            isBookmarked,
+            toggleBookmark,
+            toggleSide: handleDetailSidePanelToggle,
+            onCloseMainPanel: handleDetailPanelClose,
+        },
     };
 };

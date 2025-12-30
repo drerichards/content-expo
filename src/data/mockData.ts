@@ -1,4 +1,4 @@
-import { ContentItem, VideoSearchResult } from "../features/video/types";
+import { ContentItem, VideoSearchResult } from "../types";
 
 export const mockItems: (ContentItem | VideoSearchResult)[] = [
   {

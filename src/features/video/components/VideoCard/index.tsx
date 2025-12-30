@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./VideoCard.module.css";
-import { VideoSearchResult } from "@/features/video/types";
+import { VideoSearchResult } from "@/types";
 
 type VideoCardProps = {
   video: VideoSearchResult;

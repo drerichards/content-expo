@@ -1,9 +1,5 @@
 import styles from "./ResultsList.module.css";
-import type {
-  Bookmark,
-  ContentItem,
-  VideoSearchResult,
-} from "@/features/video/types";
+import type { Bookmark, ContentItem, VideoSearchResult } from "@/types";
 import VideoCard from "@/features/video/components/VideoCard";
 import ArticleCard from "@/features/article/components/ArticleCard";
 
