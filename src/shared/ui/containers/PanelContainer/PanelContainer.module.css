@@ -1,19 +1,22 @@
 .panelContainer {
-  /* padding: 1rem;
-  display: flex; */
+  display: flex;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
-.panelSplitContainer {
+/* When side panel is open, create 3-column layout */
+.panelOpen {
   display: grid;
   grid-template-columns: 430px 1fr;
+  gap: 1.5rem;
   width: 100%;
   height: 100%;
 }
 
-.panelOpen {
-  display: block;
+/* Default 2-column layout (video + up next) when no side panel */
+.panelSplitContainer {
+  display: flex;
   width: 100%;
   height: 100%;
 }

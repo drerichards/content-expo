@@ -1,63 +1,56 @@
+// src/interface/search/components/SearchPanels.tsx
+
 import PanelContainer from "@/shared/ui/containers/PanelContainer";
-import styles from "@/shared/styles/layout.module.css";
+import { TextBlock } from "@/shared/ui/blocks";
+import { SearchResultsPanel } from "./SearchResultsPanel";
+import { SearchDetailPanel } from "./SearchDetailPanel";
 
-import SearchResultsPanel from "./SearchResultsPanel";
-import SearchDetailPanel from "./SearchDetailPanel";
-
-import { ContentItem, Bookmark } from "@/types";
-
-type ResultsPanelProps = Omit<
-  React.ComponentProps<typeof SearchResultsPanel>,
-  "toBookmark"
->;
-
-type DetailPanelProps = Omit<
-  React.ComponentProps<typeof SearchDetailPanel>,
-  "toBookmark"
->;
+type ResultsPanelProps = React.ComponentProps<typeof SearchResultsPanel>;
+type DetailPanelProps = React.ComponentProps<typeof SearchDetailPanel>;
 
 type Props = {
   resultsPanelProps: ResultsPanelProps;
   detailPanelProps: DetailPanelProps;
-  toBookmark: (item: ContentItem) => Bookmark;
 };
 
-const SearchPanels = ({
+export const SearchPanels = ({
   resultsPanelProps,
   detailPanelProps,
-  toBookmark,
 }: Props) => {
-  const {
-    hasSearched,
-    videoSearchResults,
-    showBookmarks,
-    selectedItem,
-  } = resultsPanelProps;
+  const { hasSearched, videoSearchResults, selectedItem, isLoading } =
+    resultsPanelProps;
 
-  const { isSideOpen } = detailPanelProps;
+  if (!hasSearched && !selectedItem) {
+    return (
+      <PanelContainer hasSelectedItem={false} sideOpen={false}>
+        <TextBlock body="Search to begin." />
+      </PanelContainer>
+    );
+  }
+
+  if (hasSearched && isLoading && !selectedItem) {
+    return (
+      <PanelContainer hasSelectedItem={false} sideOpen={false}>
+        <TextBlock body="Searching…" />
+      </PanelContainer>
+    );
+  }
+
+  if (hasSearched && !isLoading && videoSearchResults.length === 0) {
+    return (
+      <PanelContainer hasSelectedItem={false} sideOpen={false}>
+        <TextBlock body="No results found." />
+      </PanelContainer>
+    );
+  }
 
   return (
-    <>
-      {hasSearched && videoSearchResults.length === 0 && (
-        <p className={styles.noResults}>
-          No results found. Try refining your query.
-        </p>
-      )}
-
-      {(videoSearchResults.length > 0 || showBookmarks) && (
-        <PanelContainer hasSelectedItem={!!selectedItem} sideOpen={isSideOpen}>
-          {!isSideOpen && (
-            <SearchResultsPanel
-              {...resultsPanelProps}
-              toBookmark={toBookmark}
-            />
-          )}
-
-          <SearchDetailPanel {...detailPanelProps} toBookmark={toBookmark} />
-        </PanelContainer>
-      )}
-    </>
+    <PanelContainer
+      hasSelectedItem={!!selectedItem}
+      sideOpen={detailPanelProps.isSideOpen}
+    >
+      <SearchResultsPanel {...resultsPanelProps} />
+      <SearchDetailPanel {...detailPanelProps} />
+    </PanelContainer>
   );
 };
-
-export default SearchPanels;

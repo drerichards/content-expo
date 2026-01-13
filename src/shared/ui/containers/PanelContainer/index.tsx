@@ -9,16 +9,12 @@ type PanelContainerProps = {
 // holds side and main panels
 export default function PanelContainer({
   children,
-  hasSelectedItem: hasDetail,
+  hasSelectedItem,
   sideOpen,
 }: PanelContainerProps) {
-  const className = [
-    styles.panelContainer,
-    hasDetail && !sideOpen ? styles.panelSplitContainer : null,
-    sideOpen ? styles.panelOpen : null,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  // When side panel is open, use grid layout to show search results + detail
+  // Otherwise, just display the detail panel with its internal 2-column layout
+  const className = sideOpen ? styles.panelOpen : styles.panelContainer;
 
   return <div className={className}>{children}</div>;
 }

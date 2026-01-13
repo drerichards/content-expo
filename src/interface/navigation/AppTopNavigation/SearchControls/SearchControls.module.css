@@ -1,0 +1,26 @@
+/* src/interface/navigation/AppTopNavigation/SearchControls/SearchControls.module.css */
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.welcome {
+    font-size: var(--font-sm);
+    color: var(--text-muted);
+}
+
+.searchInput {
+    width: 100%;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+    background: var(--surface-1);
+    color: var(--text-primary);
+}
+
+.filters {
+    display: flex;
+    gap: var(--space-2);
+}

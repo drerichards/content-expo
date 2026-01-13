@@ -1,88 +1,92 @@
+// src/interface/search/hooks/useSearchPage.ts
+// FIX: adapt toggleBookmark so its signature matches SearchDetailPanelProps
+
+"use client";
+
 import { useState } from "react";
-import { ContentItem, VideoSearchResult, Bookmark } from "@/types";
+import { ContentItem, Bookmark } from "@/types";
 import { useVideoSearch } from "@/features/video/hooks/useVideoSearch";
 import { useBookmarks } from "@/features/bookmark/hooks/useBookmarks";
 import { mockItems } from "@/data/mockData";
-import { mapBookmarkToContentItem } from "../mappers";
+import { mapContentItemToBookmark } from "../mappers";
+import {
+  CONTEXT_OPTIONS,
+  LEVEL_OPTIONS,
+} from "@/interface/navigation/AppTopNavigation/SearchFilters/searchFilterOptions";
 
 export const useSearchPage = () => {
-    const [selectedItem, setSelectedItem] = useState<ContentItem | null>(null);
-    const [isSideOpen, setIsSideOpen] = useState(false);
-    const [showBookmarks, setShowBookmarks] = useState(false);
-    const [hasSearched, setHasSearched] = useState(false);
+  const [query, setQuery] = useState("");
+  const [context, setContext] = useState(CONTEXT_OPTIONS[0]);
+  const [level, setLevel] = useState(LEVEL_OPTIONS[0]);
 
-    const { videoSearchResults, onVideoSearch } = useVideoSearch();
-    const { bookmarks, isBookmarked, toggleBookmark, refreshBookmarks } =
-        useBookmarks();
+  const [hasSearched, setHasSearched] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<ContentItem | null>(null);
+  const [isSideOpen, setIsSideOpen] = useState(false);
 
-    const videos: VideoSearchResult[] = videoSearchResults;
-    const articles: ContentItem[] = mockItems.filter(
-        (item): item is ContentItem => item.type === "article"
-    );
+  const { videoSearchResults, onVideoSearch, isLoading } = useVideoSearch();
+  const { isBookmarked, toggleBookmark: toggleBookmarkRaw } = useBookmarks();
 
-    const handleSearchSubmit = (query: string) => {
-        onVideoSearch(query);
+  const articles: ContentItem[] = mockItems.filter(
+    (item): item is ContentItem => item.type === "article",
+  );
+
+  const upNextItems: ContentItem[] = mockItems.slice(0, 5);
+
+  const handleSearchSubmit = (value: string) => {
+    onVideoSearch(value);
+    setHasSearched(true);
+    setSelectedItem(null);
+  };
+
+  const handleSelectItem = (item: ContentItem) => {
+    setSelectedItem(item);
+  };
+
+  // ✅ ADAPTER — THIS IS THE FIX
+  const toggleBookmark = (item: ContentItem | Bookmark) => {
+    if ("savedAt" in item) {
+      toggleBookmarkRaw(item);
+    } else {
+      toggleBookmarkRaw(mapContentItemToBookmark(item));
+    }
+  };
+
+  return {
+    layoutProps: {
+      hasSelectedItem: !!selectedItem,
+    },
+    searchControlsProps: {
+      query,
+      onQueryChange: setQuery,
+      context,
+      level,
+      onContextChange: setContext,
+      onLevelChange: setLevel,
+      onSearch: handleSearchSubmit,
+      onToggleSearchFilters: () => {},
+      welcomeText: "Welcome back Jordan — ready to continue learning?",
+    },
+    resultsPanelProps: {
+      hasSearched,
+      isSideOpen,
+      selectedItem,
+      videoSearchResults,
+      articles,
+      onSelectItem: handleSelectItem,
+      isLoading,
+    },
+    detailPanelProps: {
+      selectedItem,
+      isSideOpen,
+      isBookmarked,
+      toggleBookmark, // ✅ NOW MATCHES (ContentItem | Bookmark) => void
+      upNextItems,
+      onSelectUpNextItem: handleSelectItem,
+      toggleSide: () => setIsSideOpen((v) => !v),
+      onCloseMainPanel: () => {
         setSelectedItem(null);
-        setShowBookmarks(false);
-        setHasSearched(true);
-    };
-
-    const handleResultItemSelect = (item: ContentItem | Bookmark) => {
-        if ("savedAt" in item) {
-            setSelectedItem(mapBookmarkToContentItem(item));
-        } else {
-            setSelectedItem(item);
-        }
-    };
-
-    const handleDetailSidePanelToggle = () => {
-        setIsSideOpen((prev) => !prev);
-    };
-
-    const handleBookmarksOpen = () => {
-        refreshBookmarks();
         setIsSideOpen(false);
-        setShowBookmarks(true);
-    };
-
-    const handleBookmarksClose = () => {
-        setShowBookmarks(false);
-    };
-
-    const handleDetailPanelClose = () => {
-        setSelectedItem(null);
-        setIsSideOpen(false);
-    };
-
-    return {
-        layoutProps: {
-            hasSelectedItem: !!selectedItem,
-        },
-        headerProps: {
-            onSearch: handleSearchSubmit,
-            onOpenBookmarks: handleBookmarksOpen,
-        },
-        resultsPanelProps: {
-            hasSearched,
-            showBookmarks,
-            isSideOpen,
-            selectedItem,
-            videoSearchResults,
-            videos,
-            articles,
-            bookmarks,
-            isBookmarked,
-            toggleBookmark,
-            onSelectItem: handleResultItemSelect,
-            onCloseBookmarks: handleBookmarksClose,
-        },
-        detailPanelProps: {
-            selectedItem,
-            isSideOpen,
-            isBookmarked,
-            toggleBookmark,
-            toggleSide: handleDetailSidePanelToggle,
-            onCloseMainPanel: handleDetailPanelClose,
-        },
-    };
+      },
+    },
+  };
 };

@@ -1,5 +1,6 @@
-export { default as SearchLayout } from "./SearchLayout";
-export { default as SearchHeader } from "./SearchHeader";
-export { default as SearchPanels } from "./SearchPanels";
-export { default as SearchResultsPanel } from "./SearchResultsPanel";
-export { default as SearchDetailPanel } from "./SearchDetailPanel";
+export { SearchPageLayout } from "./SearchPageLayout";
+export { SearchControls } from "../../navigation/AppTopNavigation/SearchControls";
+export { SearchPanels } from "./SearchPanels";
+export { SearchResultsPanel } from "./SearchResultsPanel";
+export { SearchDetailPanel } from "./SearchDetailPanel";
+export { UpNextPanel } from "./UpNextPanel";

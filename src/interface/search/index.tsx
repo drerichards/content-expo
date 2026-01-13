@@ -1,33 +1,29 @@
-/**
- * Renders the main search page UI.
- *
- * @remarks
- * This component wires together the search page layout, header, results panel,
- * and detail panel. It delegates state management and behavior to the
- * `useSearchPage` hook and passes a mapping function to convert content items
- * into bookmark entities.
- */
+// src/interface/search/index.tsx
+// FIX: remove any reference to `videos`
+
 "use client";
 
 import { useSearchPage } from "./hooks/useSearchPage";
-import { mapContentItemToBookmark } from "./mappers";
-
-import { SearchLayout, SearchHeader, SearchPanels } from "./components";
+import { AppContainer } from "@/interface/app/AppContainer";
+import { SearchPageLayout, SearchPanels } from "./components";
 
 const SearchPageUI = () => {
-  const { layoutProps, headerProps, resultsPanelProps, detailPanelProps } =
-    useSearchPage();
+  const {
+    layoutProps,
+    searchControlsProps,
+    resultsPanelProps,
+    detailPanelProps,
+  } = useSearchPage();
 
   return (
-    <SearchLayout {...layoutProps}>
-      <SearchHeader {...headerProps} />
-
-      <SearchPanels
-        resultsPanelProps={resultsPanelProps}
-        detailPanelProps={detailPanelProps}
-        toBookmark={mapContentItemToBookmark}
-      />
-    </SearchLayout>
+    <AppContainer searchControlsProps={searchControlsProps}>
+      <SearchPageLayout hasSelectedItem={layoutProps.hasSelectedItem}>
+        <SearchPanels
+          resultsPanelProps={resultsPanelProps}
+          detailPanelProps={detailPanelProps}
+        />
+      </SearchPageLayout>
+    </AppContainer>
   );
 };
 

@@ -1,15 +1,16 @@
+// src/types/index.ts
+
 export type Bookmark = {
-   id: string;
-   provider: "video" | "web";
-   providerId: string;
-   type: ContentType;
-   title: string;
-   source: string;
-   url: string;
-   savedAt: string;
-   // For bookmarks we always store a description and published date
-   publishedAt: string;
-   description: string;
+  id: string;
+  provider: "video" | "web";
+  providerId: string;
+  type: ContentType;
+  title: string;
+  source: string;
+  url: string;
+  savedAt: string;
+  publishedAt: string;
+  description: string;
 };
 
 type ContentType = "video" | "article" | "playlist";
@@ -43,21 +44,44 @@ export type VideoApiThumbnail = {
   height?: number;
 };
 
-export type VideoApiItem = {
-  id?: { videoId?: string } | string;
-  snippet?: {
-    title?: string;
-    description?: string;
-    channelTitle?: string;
-    channelId: string;
-    publishedAt?: string;
-    thumbnails?: {
-      default?: VideoApiThumbnail;
-      medium?: VideoApiThumbnail;
-    };
-  };
+export type SearchControlsProps = {
+  query: string;
+  onQueryChange: (v: string) => void;
+
+  context: string;
+  level: string;
+  onContextChange: (v: string) => void;
+  onLevelChange: (v: string) => void;
+
+  onSearch: (query: string) => void;
+  onToggleSearchFilters: () => void;
+  welcomeText: string;
 };
 
-export type VideoApiSearchResponse = {
-  items?: VideoApiItem[];
+export type ResultsPanelProps = {
+  hasSearched: boolean;
+  isSideOpen: boolean;
+  selectedItem: ContentItem | null;
+
+  videoSearchResults: VideoSearchResult[];
+  articles: ContentItem[];
+
+  onSelectItem: (item: ContentItem) => void;
+  isLoading: boolean;
+};
+
+export type SearchDetailPanelProps = {
+  selectedItem: ContentItem | null;
+  isSideOpen: boolean;
+
+  isBookmarked: (id: string) => boolean;
+
+  // ✅ FIX: accept BOTH
+  toggleBookmark: (item: ContentItem | Bookmark) => void;
+
+  upNextItems: ContentItem[];
+  onSelectUpNextItem: (item: ContentItem) => void;
+
+  toggleSide: () => void;
+  onCloseMainPanel: () => void;
 };
