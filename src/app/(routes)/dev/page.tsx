@@ -5,7 +5,7 @@ import {
   ListItem,
   SectionBlock,
   TextBlock,
-} from "@/shared/ui/blocks";
+} from "@/shared/ui/block";
 
 export default function CssExample() {
   return (

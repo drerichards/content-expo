@@ -1,0 +1,25 @@
+/* src/shared/ui/frame/AppFrame/AppFrame.module.css */
+@layer blocks {
+    .frame {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        grid-template-columns: auto 1fr;
+        grid-template-areas:
+            'top top'
+            'side main';
+        min-height: 100svh;
+    }
+
+    .top {
+        grid-area: top;
+    }
+
+    .side {
+        grid-area: side;
+    }
+
+    .main {
+        grid-area: main;
+        min-width: 0;
+    }
+}

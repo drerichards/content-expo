@@ -1,7 +1,7 @@
 // src/interface/search/components/SearchPanels.tsx
 
 import PanelContainer from "@/shared/ui/containers/PanelContainer";
-import { TextBlock } from "@/shared/ui/blocks";
+import { TextBlock } from "@/shared/ui/block";
 import { SearchResultsPanel } from "./SearchResultsPanel";
 import { SearchDetailPanel } from "./SearchDetailPanel";
 

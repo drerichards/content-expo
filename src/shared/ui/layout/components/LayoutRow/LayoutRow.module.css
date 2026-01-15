@@ -1,0 +1,8 @@
+/* src/shared/ui/layout/Row/Row.module.css */
+@layer blocks {
+    .row {
+        display: flex;
+        flex-direction: row;
+        min-width: 0;
+    }
+}

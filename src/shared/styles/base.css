@@ -1,0 +1,8 @@
+/* src/shared/styles/base.css */
+@layer base {
+    body {
+        background: var(--app-bg);
+        color: var(--ink);
+        font-family: var(--font-sans);
+    }
+}

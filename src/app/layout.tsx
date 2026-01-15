@@ -1,7 +1,9 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
-import { Providers } from "./providers";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Providers } from "./providers";
+import { AppContainer } from "@/shared/app/AppContainer";
+
 import "@/shared/styles/tokens.css";
 import "@/shared/styles/rules.css";
 
@@ -30,7 +32,9 @@ export default function RootLayout({
       <body
         className={`app ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <AppContainer>{children}</AppContainer>
+        </Providers>
       </body>
     </html>
   );

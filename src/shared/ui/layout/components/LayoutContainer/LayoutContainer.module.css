@@ -1,0 +1,6 @@
+/* src/shared/ui/layout/Container/Container.module.css */
+@layer blocks {
+    .container {
+        min-width: 0;
+    }
+}
