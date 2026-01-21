@@ -3,20 +3,31 @@
   width: 100%;
   height: 100%;
   position: relative;
+  overflow: hidden;
 }
 
-/* When side panel is open, create 3-column layout */
-.panelOpen {
+/* When side panel is open, create 2-column layout */
+.panelContainer[data-side-open] {
   display: grid;
   grid-template-columns: 430px 1fr;
   gap: 1.5rem;
-  width: 100%;
-  height: 100%;
 }
 
-/* Default 2-column layout (video + up next) when no side panel */
-.panelSplitContainer {
-  display: flex;
-  width: 100%;
-  height: 100%;
+/* When panel is collapsed, position results panel off-screen with small tab visible */
+.panelContainer[data-side-open][data-panel-collapsed] {
+  grid-template-columns: 48px 1fr;
+  gap: 0;
+}
+
+.panelContainer[data-side-open][data-panel-collapsed]>*:first-child {
+  position: relative;
+  transform: translateX(-382px);
+  transition: transform 0.3s ease;
+  overflow: hidden;
+  width: 430px;
+}
+
+.panelContainer[data-side-open]:not([data-panel-collapsed])>*:first-child {
+  transform: translateX(0);
+  transition: transform 0.3s ease;
 }

@@ -1,59 +1,53 @@
-// src/interface/navigation/AppTopNavigation/SearchControls/index.tsx
 "use client";
 
+import type { FormEvent } from "react";
+import { SearchControlsContextValue } from "@/interface/search/context/SearchControlsContext";
 import {
-  CONTEXT_OPTIONS,
-  LEVEL_OPTIONS,
-} from "@/interface/navigation/AppTopNavigation/SearchFilters/searchFilterOptions";
-import { SearchControlsProps } from "@/types";
+  Card,
+  Button,
+  Form,
+  Section,
+  Text,
+} from "@/shared/ui/block";
 import styles from "./SearchControls.module.css";
+import { SearchFilters } from "../SearchFilters";
+import { SearchInput } from "../SearchInput";
 
 export const SearchControls = ({
   query,
   onQueryChange,
   context,
-  level,
   onContextChange,
+  level,
   onLevelChange,
   onSearch,
-  onToggleSearchFilters,
   welcomeText,
-}: SearchControlsProps) => {
+}: SearchControlsContextValue) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    onSearch(query);
+  };
+
   return (
-    <div className={styles.controls}>
-      <div className={styles.welcome}>{welcomeText}</div>
+    <Section>
+      <Text className={styles.welcome} body={welcomeText} />
 
-      <input
-        className={styles.searchInput}
-        value={query}
-        onChange={(e) => onQueryChange(e.target.value)}
-        placeholder="Search"
-      />
+      <Card density="tight">
+        <Form className={styles.form} onSubmit={handleSubmit}>
+          <SearchInput query={query} onQueryChange={onQueryChange} />
 
-      <button onClick={() => onSearch(query)}>Search</button>
+          <SearchFilters
+            context={context}
+            onContextChange={onContextChange}
+            level={level}
+            onLevelChange={onLevelChange}
+          />
 
-      <button onClick={onToggleSearchFilters}>Filters</button>
-
-      <div className={styles.filters}>
-        <select
-          value={context}
-          onChange={(e) => onContextChange(e.target.value)}
-        >
-          {CONTEXT_OPTIONS.map((opt) => (
-            <option key={opt} value={opt}>
-              {opt}
-            </option>
-          ))}
-        </select>
-
-        <select value={level} onChange={(e) => onLevelChange(e.target.value)}>
-          {LEVEL_OPTIONS.map((opt) => (
-            <option key={opt} value={opt}>
-              {opt}
-            </option>
-          ))}
-        </select>
-      </div>
-    </div>
+          <Button type="submit" className={styles.submit}>
+            Search
+          </Button>
+        </Form>
+      </Card>
+    </Section>
   );
 };

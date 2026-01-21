@@ -8,10 +8,13 @@ export const BlockCard = ({
   title,
   typography,
   isInteractive = false,
+  className,
   children,
 }: BlockCardProps) => {
   const base = buildElementClasses({ color, density, typography });
-  const classes = `${base}${isInteractive ? " action focus-ring" : ""}`;
+  const classes = [base, isInteractive ? "action focus-ring" : "", className]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <Base className={classes} aria-disabled={!isInteractive}>

@@ -1,18 +1,5 @@
 // src/types/index.ts
 
-export type Bookmark = {
-  id: string;
-  provider: "video" | "web";
-  providerId: string;
-  type: ContentType;
-  title: string;
-  source: string;
-  url: string;
-  savedAt: string;
-  publishedAt: string;
-  description: string;
-};
-
 type ContentType = "video" | "article" | "playlist";
 
 export type ContentItem = {
@@ -61,27 +48,19 @@ export type SearchControlsProps = {
 export type ResultsPanelProps = {
   hasSearched: boolean;
   isSideOpen: boolean;
-  selectedItem: ContentItem | null;
+  selectedItem?: ContentItem;
 
-  videoSearchResults: VideoSearchResult[];
-  articles: ContentItem[];
+  videoSearchResults?: VideoSearchResult[];
+  articles?: ContentItem[];
 
   onSelectItem: (item: ContentItem) => void;
   isLoading: boolean;
+  isError?: boolean;
 };
 
 export type SearchDetailPanelProps = {
-  selectedItem: ContentItem | null;
-  isSideOpen: boolean;
-
-  isBookmarked: (id: string) => boolean;
-
-  // ✅ FIX: accept BOTH
-  toggleBookmark: (item: ContentItem | Bookmark) => void;
-
+  selectedItem?: ContentItem;
   upNextItems: ContentItem[];
   onSelectUpNextItem: (item: ContentItem) => void;
-
-  toggleSide: () => void;
-  onCloseMainPanel: () => void;
+  onCloseContentPanel: () => void;
 };

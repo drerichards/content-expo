@@ -1,6 +1,7 @@
 "use client";
 
 import { CONTEXT_OPTIONS, LEVEL_OPTIONS } from "./searchFilterOptions";
+import { Field, List, ListItem, Section, Select } from "@/shared/ui/block";
 import styles from "./SearchFilters.module.css";
 
 type Props = {
@@ -16,35 +17,43 @@ export const SearchFilters = ({
   onContextChange,
   onLevelChange,
 }: Props) => {
-  return (
-    <>
-      <div className={styles.searchRow}>
-        <select
-          value={context}
-          onChange={(e) => onContextChange(e.target.value)}
-        >
-          {CONTEXT_OPTIONS.map((opt) => (
-            <option key={opt} value={opt}>
-              {opt}
-            </option>
-          ))}
-        </select>
-      </div>
+  const FILTERS = [
+    {
+      label: "Context",
+      value: context,
+      onChange: onContextChange,
+      options: CONTEXT_OPTIONS,
+    },
+    {
+      label: "Level",
+      value: level,
+      onChange: onLevelChange,
+      options: LEVEL_OPTIONS,
+    },
+  ];
 
-      <div className={styles.levelRow}>
-        {LEVEL_OPTIONS.map((opt) => (
-          <label key={opt} className={styles.levelOption}>
-            <input
-              type="radio"
-              name="level"
-              value={opt}
-              checked={level === opt}
-              onChange={() => onLevelChange(opt)}
-            />
-            <span>{opt}</span>
-          </label>
-        ))}
-      </div>
-    </>
+  return (
+    <Section className={styles.filters}>
+      <List>
+        <List>
+          {FILTERS.map(({ label, value, onChange, options }) => (
+            <ListItem key={label}>
+              <Field label={label}>
+                <Select
+                  value={value}
+                  onChange={(e) => onChange(e.target.value)}
+                >
+                  {options.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
+              </Field>
+            </ListItem>
+          ))}
+        </List>
+      </List>
+    </Section>
   );
 };

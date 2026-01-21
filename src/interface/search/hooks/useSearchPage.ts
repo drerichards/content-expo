@@ -3,12 +3,10 @@
 
 "use client";
 
-import { useState } from "react";
-import { ContentItem, Bookmark } from "@/types";
+import { useCallback, useMemo, useState } from "react";
+import { ContentItem } from "@/types";
 import { useVideoSearch } from "@/features/video/hooks/useVideoSearch";
-import { useBookmarks } from "@/features/bookmark/hooks/useBookmarks";
-import { mockItems } from "@/data/mockData";
-import { mapContentItemToBookmark } from "../mappers";
+import { useContentData } from "./useContentData";
 import {
   CONTEXT_OPTIONS,
   LEVEL_OPTIONS,
@@ -20,73 +18,84 @@ export const useSearchPage = () => {
   const [level, setLevel] = useState(LEVEL_OPTIONS[0]);
 
   const [hasSearched, setHasSearched] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<ContentItem | null>(null);
+  const [selectedItem, setSelectedItem] = useState<ContentItem | undefined>(
+    undefined,
+  );
   const [isSideOpen, setIsSideOpen] = useState(false);
+  const [isPanelExpanded, setIsPanelExpanded] = useState(true);
 
-  const { videoSearchResults, onVideoSearch, isLoading } = useVideoSearch();
-  const { isBookmarked, toggleBookmark: toggleBookmarkRaw } = useBookmarks();
+  const { videoSearchResults, onVideoSearch, isLoading, isError } =
+    useVideoSearch();
+  const { articles, upNextItems } = useContentData();
 
-  const articles: ContentItem[] = mockItems.filter(
-    (item): item is ContentItem => item.type === "article",
+  const handleSearchSubmit = useCallback(
+    (value: string) => {
+      onVideoSearch(value);
+      setHasSearched(true);
+      setSelectedItem(undefined);
+    },
+    [onVideoSearch],
   );
 
-  const upNextItems: ContentItem[] = mockItems.slice(0, 5);
-
-  const handleSearchSubmit = (value: string) => {
-    onVideoSearch(value);
-    setHasSearched(true);
-    setSelectedItem(null);
-  };
-
-  const handleSelectItem = (item: ContentItem) => {
+  const handleSelectItem = useCallback((item: ContentItem) => {
     setSelectedItem(item);
-  };
+    setIsSideOpen(true);
+  }, []);
 
-  // ✅ ADAPTER — THIS IS THE FIX
-  const toggleBookmark = (item: ContentItem | Bookmark) => {
-    if ("savedAt" in item) {
-      toggleBookmarkRaw(item);
-    } else {
-      toggleBookmarkRaw(mapContentItemToBookmark(item));
-    }
-  };
+  const emptyMessage = useMemo(() => {
+    if (!hasSearched) return "Search to begin.";
+    if (isLoading) return "Searching…";
+    if (isError) return "Search failed. Please try again.";
+    if (videoSearchResults.length === 0) return "No results found.";
+    return null;
+  }, [hasSearched, isLoading, isError, videoSearchResults.length]);
+
+  const handleCloseContentPanel = useCallback(() => {
+    setSelectedItem(undefined);
+    setIsSideOpen(false);
+    setIsPanelExpanded(true);
+  }, []);
+
+  const togglePanelExpand = useCallback(
+    () => setIsPanelExpanded((v) => !v),
+    [],
+  );
+
+  const toggleSide = useCallback(() => setIsSideOpen((v) => !v), []);
 
   return {
-    layoutProps: {
-      hasSelectedItem: !!selectedItem,
-    },
-    searchControlsProps: {
-      query,
-      onQueryChange: setQuery,
-      context,
-      level,
-      onContextChange: setContext,
-      onLevelChange: setLevel,
-      onSearch: handleSearchSubmit,
-      onToggleSearchFilters: () => {},
-      welcomeText: "Welcome back Jordan — ready to continue learning?",
-    },
-    resultsPanelProps: {
-      hasSearched,
-      isSideOpen,
-      selectedItem,
-      videoSearchResults,
-      articles,
-      onSelectItem: handleSelectItem,
-      isLoading,
-    },
-    detailPanelProps: {
-      selectedItem,
-      isSideOpen,
-      isBookmarked,
-      toggleBookmark, // ✅ NOW MATCHES (ContentItem | Bookmark) => void
-      upNextItems,
-      onSelectUpNextItem: handleSelectItem,
-      toggleSide: () => setIsSideOpen((v) => !v),
-      onCloseMainPanel: () => {
-        setSelectedItem(null);
-        setIsSideOpen(false);
-      },
-    },
+    // Search controls state
+    query,
+    context,
+    level,
+    onQueryChange: setQuery,
+    onContextChange: setContext,
+    onLevelChange: setLevel,
+    onSearch: handleSearchSubmit,
+
+    // Search results state
+    hasSearched,
+    videoSearchResults,
+    articles,
+    isLoading,
+    isError,
+
+    // Selection state
+    selectedItem,
+    onSelectItem: handleSelectItem,
+
+    // Panel state
+    isSideOpen,
+    isPanelExpanded,
+    toggleSide,
+    togglePanelExpand,
+    onCloseContentPanel: handleCloseContentPanel,
+
+    // Up next
+    upNextItems,
+
+    // Derived state
+    emptyMessage,
+    hasSelectedItem: !!selectedItem,
   };
 };

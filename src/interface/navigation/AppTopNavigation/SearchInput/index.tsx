@@ -1,22 +1,21 @@
 "use client";
 
-import styles from "./SearchInput.module.css";
+import { Field, Input } from "@/shared/ui/block";
+// import styles from "./SearchInput.module.css";
 
 type SearchInputProps = {
-  value: string;
-  onChange: (value: string) => void;
+  query: string;
+  onQueryChange: (value: string) => void;
 };
 
-export const SearchInput = ({ value, onChange }: SearchInputProps) => {
+export const SearchInput = ({ query, onQueryChange }: SearchInputProps) => {
   return (
-    <div className={styles.searchRow}>
-      <input
-        type="text"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder="Search software engineering topics…"
+    <Field label="Search">
+      <Input
+        value={query}
+        onChange={(event) => onQueryChange(event.target.value)}
+        placeholder="Search"
       />
-      <button type="submit">Search</button>
-    </div>
+    </Field>
   );
 };

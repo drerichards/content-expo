@@ -1,56 +1,38 @@
 // src/interface/search/components/SearchPanels.tsx
 
 import PanelContainer from "@/shared/ui/containers/PanelContainer";
-import { TextBlock } from "@/shared/ui/block";
+import { Text } from "@/shared/ui/block";
 import { SearchResultsPanel } from "./SearchResultsPanel";
-import { SearchDetailPanel } from "./SearchDetailPanel";
-
-type ResultsPanelProps = React.ComponentProps<typeof SearchResultsPanel>;
-type DetailPanelProps = React.ComponentProps<typeof SearchDetailPanel>;
+import { SearchContentPanel } from "./SearchContentPanel";
+import { ResultsPanelProps, SearchDetailPanelProps } from "@/types";
+import { useSearchPanel } from "../context/SearchPanelContext";
 
 type Props = {
   resultsPanelProps: ResultsPanelProps;
-  detailPanelProps: DetailPanelProps;
+  detailPanelProps: SearchDetailPanelProps;
+  emptyMessage?: string | null;
 };
 
 export const SearchPanels = ({
   resultsPanelProps,
   detailPanelProps,
+  emptyMessage,
 }: Props) => {
-  const { hasSearched, videoSearchResults, selectedItem, isLoading } =
-    resultsPanelProps;
+  const { isSideOpen, isPanelExpanded } = useSearchPanel();
+  const { selectedItem } = resultsPanelProps;
 
-  if (!hasSearched && !selectedItem) {
+  if (!selectedItem && emptyMessage) {
     return (
-      <PanelContainer hasSelectedItem={false} sideOpen={false}>
-        <TextBlock body="Search to begin." />
-      </PanelContainer>
-    );
-  }
-
-  if (hasSearched && isLoading && !selectedItem) {
-    return (
-      <PanelContainer hasSelectedItem={false} sideOpen={false}>
-        <TextBlock body="Searching…" />
-      </PanelContainer>
-    );
-  }
-
-  if (hasSearched && !isLoading && videoSearchResults.length === 0) {
-    return (
-      <PanelContainer hasSelectedItem={false} sideOpen={false}>
-        <TextBlock body="No results found." />
+      <PanelContainer sideOpen={false}>
+        <Text body={emptyMessage} />
       </PanelContainer>
     );
   }
 
   return (
-    <PanelContainer
-      hasSelectedItem={!!selectedItem}
-      sideOpen={detailPanelProps.isSideOpen}
-    >
+    <PanelContainer sideOpen={isSideOpen} panelCollapsed={!isPanelExpanded}>
       <SearchResultsPanel {...resultsPanelProps} />
-      <SearchDetailPanel {...detailPanelProps} />
+      <SearchContentPanel {...detailPanelProps} />
     </PanelContainer>
   );
 };

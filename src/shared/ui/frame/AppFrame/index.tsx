@@ -1,4 +1,4 @@
-// src/shared/ui/frame/AppFrame/AppFrame.tsx
+// src/shared/ui/frame/AppFrame/index.tsx
 "use client";
 
 import { Base } from "@/shared/ui/base";

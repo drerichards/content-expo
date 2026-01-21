@@ -2,17 +2,15 @@
 "use client";
 
 import { SearchControls } from "./SearchControls";
+import { useSearchControlsValue } from "@/interface/search/context/SearchControlsContext";
+import { BlockHeader as Header } from "@/shared/ui/block/components/BlockHeader";
 
-type AppTopNavigationProps = {
-  searchControlsProps: React.ComponentProps<typeof SearchControls>;
-};
+export const AppTopNavigation = () => {
+  const searchControlsProps = useSearchControlsValue();
 
-export const AppTopNavigation = ({
-  searchControlsProps,
-}: AppTopNavigationProps) => {
   return (
-    <header>
-      <SearchControls {...searchControlsProps} />
-    </header>
+    <Header>
+      {searchControlsProps ? <SearchControls {...searchControlsProps} /> : null}
+    </Header>
   );
 };

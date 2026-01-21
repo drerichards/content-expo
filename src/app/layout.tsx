@@ -1,9 +1,10 @@
-// src/app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "./providers";
-import { AppContainer } from "@/shared/app/AppContainer";
-
+import { AppFrame } from "@/shared/ui/frame/AppFrame";
+import { AppSideNavigation } from "@/interface/navigation/AppSideNavigation";
+import { AppTopNavigation } from "@/interface/navigation/AppTopNavigation";
+import { SearchControlsProvider } from "@/interface/search/context/SearchControlsContext";
 import "@/shared/styles/tokens.css";
 import "@/shared/styles/rules.css";
 
@@ -19,7 +20,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Kernel",
-  description: "Kernel learning engine",
+  description: "Learning engine",
 };
 
 export default function RootLayout({
@@ -29,11 +30,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={`app ${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`app ${geistSans.variable} ${geistMono.variable}`}>
         <Providers>
-          <AppContainer>{children}</AppContainer>
+          <SearchControlsProvider>
+            <AppFrame
+              top={<AppTopNavigation />}
+              side={<AppSideNavigation />}
+              main={children}
+            />
+          </SearchControlsProvider>
         </Providers>
       </body>
     </html>

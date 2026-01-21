@@ -1,6 +1,11 @@
-export { BlockCard } from "./components/BlockCard";
-export { BlockHeader } from "./components/BlockHeader";
-export { BlockList } from "./components/BlockList/BlockList";
-export { BlockListItem } from "./components/BlockListItem";
-export { BlockSection } from "./components/BlockSection";
-export { BlockText } from "./components/BlockText";
+export { BlockCard as Card } from "./components/BlockCard";
+export { BlockButton as Button } from "./components/BlockButton";
+export { BlockHeader as Header } from "./components/BlockHeader";
+export { BlockField as Field } from "./components/BlockField";
+export { BlockForm as Form } from "./components/BlockForm";
+export { BlockInput as Input } from "./components/BlockInput";
+export { BlockList as List } from "./components/BlockList/BlockList";
+export { BlockListItem as ListItem } from "./components/BlockListItem";
+export { BlockSelect as Select } from "./components/BlockSelect";
+export { BlockSection as Section } from "./components/BlockSection";
+export { BlockText as Text } from "./components/BlockText";
