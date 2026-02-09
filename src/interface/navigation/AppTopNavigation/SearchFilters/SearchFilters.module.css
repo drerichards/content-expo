@@ -1,9 +1,125 @@
-.filters {
-  width: 100%;
+.container {
+  position: relative;
 }
 
-.filters :global(.row-wrap) {
+.toggleButton {
   display: flex;
+  align-items: center;
   gap: var(--space-2);
-  flex-wrap: wrap;
+  height: 56px;
+  padding: 0 var(--space-5);
+  border: var(--border-strong);
+  border-radius: var(--radius-xl);
+  background: var(--surface-muted);
+  color: var(--ink-primary);
+  font-size: var(--fs-md);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.toggleButton:hover {
+  background: var(--accent-orange-1);
+}
+
+.toggleButton[data-active="true"] {
+  background: var(--accent-teal-1);
+  color: var(--ink-primary);
+}
+
+.badge {
+  padding: var(--space-1) var(--space-2);
+  background: var(--ink-primary);
+  color: var(--app-bg);
+  border: 2px solid var(--ink-primary);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-xs);
+  font-weight: var(--font-weight-bold);
+}
+
+.chevron {
+  font-size: var(--fs-xs);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.chevron[data-open="true"] {
+  transform: rotate(180deg);
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+}
+
+.tray {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: 0;
+  width: 400px;
+  background: var(--app-bg);
+  border: var(--border-strong);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-hard);
+  z-index: var(--z-dropdown);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.filterLabel {
+  font-size: var(--fs-sm);
+  color: var(--ink-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.filterButtons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.filterButton {
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-strong);
+  border-radius: var(--radius-xl);
+  background: var(--surface-primary);
+  color: var(--ink-primary);
+  font-size: var(--fs-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.filterButton[data-active="true"] {
+  background: var(--accent-teal-1);
+  color: var(--ink-primary);
+}
+
+.filterButton[data-active="true"][data-group="context"] {
+  background: var(--accent-teal-1);
+  color: var(--ink-primary);
+}
+
+.filterButton[data-active="true"][data-group="level"] {
+  background: var(--accent-orange-1);
+  color: var(--ink-primary);
+}
+
+.filterButton:hover {
+  background: var(--surface-hover);
+  transform: translate(1px, 1px);
 }

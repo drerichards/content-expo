@@ -1,30 +1,35 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding: 0.75rem 0.75rem 1rem;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-3) var(--space-4);
 }
 
 .header {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
   justify-content: space-between;
 }
 
 .backButton {
   border: none;
   background: none;
-  color: #2563eb;
+  color: var(--accent-blue-1);
   cursor: pointer;
-  font-size: 0.8rem;
-  font-weight: 500;
+  font-size: var(--fs-xs);
+  font-weight: var(--font-weight-medium);
+  transition: text-decoration var(--duration-fast) var(--ease-out);
+}
+
+.backButton:hover {
+  text-decoration: underline;
 }
 
 .title {
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: var(--fs-md);
+  font-weight: var(--font-weight-semibold);
 }
 
 .list {
@@ -32,10 +37,10 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--space-2);
 }
 
 .empty {
-  font-size: 0.9rem;
-  color: #6b7280;
+  font-size: var(--fs-sm);
+  color: var(--ink-secondary);
 }

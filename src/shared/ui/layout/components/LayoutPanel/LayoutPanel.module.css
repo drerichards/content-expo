@@ -1,4 +1,10 @@
-/* src/shared/ui/layout/Row/Row.module.css */
+/* src/shared/ui/layout/components/LayoutPanel/LayoutPanel.module.css */
 @layer blocks {
-    .panel {}
+    .panel {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow-y: auto;
+        background: transparent;
+    }
 }

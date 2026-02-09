@@ -13,14 +13,16 @@ type AppFrameProps = {
 export const AppFrame = ({ top, side, main }: AppFrameProps) => {
   return (
     <Base className={styles.frame}>
-      <Base as="header" className={styles.top}>
-        {top}
-      </Base>
       <Base as="aside" className={styles.side}>
         {side}
       </Base>
-      <Base as="main" className={styles.main}>
-        {main}
+      <Base className={styles.content}>
+        <Base as="header" className={styles.top}>
+          {top}
+        </Base>
+        <Base as="main" className={styles.main}>
+          {main}
+        </Base>
       </Base>
     </Base>
   );

@@ -4,30 +4,32 @@
   height: 100%;
   position: relative;
   overflow: hidden;
+  background: var(--app-bg);
 }
 
 /* When side panel is open, create 2-column layout */
 .panelContainer[data-side-open] {
   display: grid;
-  grid-template-columns: 430px 1fr;
-  gap: 1.5rem;
+  grid-template-columns: minmax(360px, 400px) 1fr;
+  gap: 0;
 }
 
 /* When panel is collapsed, position results panel off-screen with small tab visible */
 .panelContainer[data-side-open][data-panel-collapsed] {
-  grid-template-columns: 48px 1fr;
+  grid-template-columns: 80px 1fr;
   gap: 0;
 }
 
 .panelContainer[data-side-open][data-panel-collapsed]>*:first-child {
   position: relative;
-  transform: translateX(-382px);
-  transition: transform 0.3s ease;
+  transform: translateX(calc(80px - 400px));
+  transition: transform var(--duration-base) var(--ease-out);
   overflow: hidden;
-  width: 430px;
+  width: 400px;
 }
 
 .panelContainer[data-side-open]:not([data-panel-collapsed])>*:first-child {
   transform: translateX(0);
-  transition: transform 0.3s ease;
+  transition: transform var(--duration-base) var(--ease-out);
+  border-right: var(--border-strong);
 }

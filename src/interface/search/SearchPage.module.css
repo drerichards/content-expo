@@ -1,6 +1,6 @@
 .pageContainer {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: var(--sidebar-width) 1fr;
   grid-template-rows: auto 1fr;
   min-height: 100vh;
   width: 100%;
@@ -11,9 +11,8 @@
   grid-row: 1;
   position: sticky;
   top: 0;
-  z-index: 100;
-  background-color: var(--color-background-primary, #fff);
-  border-bottom: 1px solid var(--color-border, #e0e0e0);
+  z-index: var(--z-sticky);
+  background-color: var(--surface-primary);
 }
 
 .sideNav {
@@ -21,14 +20,14 @@
   grid-row: 2;
   position: sticky;
   top: 0;
-  height: calc(100vh - 80px);
+  height: calc(100vh - var(--topbar-height));
   overflow-y: auto;
-  background-color: var(--color-background-secondary, #2c3e50);
+  background-color: var(--accent-blue-1);
 }
 
 .mainContent {
   grid-column: 2;
   grid-row: 2;
-  padding: 2rem;
+  padding: var(--space-8);
   overflow-x: hidden;
 }

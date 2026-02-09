@@ -40,6 +40,7 @@ export type BlockTextProps = BlockBaseProps & {
   title?: string;
   body?: string;
   meta?: string;
+  variant?: "title" | "body" | "meta";
 };
 
 // BlockHeader specific props

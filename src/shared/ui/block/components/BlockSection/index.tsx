@@ -13,7 +13,8 @@ export const BlockSection = ({
   const base = shouldApplyBase
     ? buildElementClasses({ color, density, typography })
     : undefined;
-  const classes = [base, className].filter(Boolean).join(" ") || undefined;
+  const classes =
+    [base, "block-section", className].filter(Boolean).join(" ") || undefined;
 
   return (
     <Base as="section" className={classes}>

@@ -5,4 +5,60 @@
         flex-direction: column;
         min-width: 0;
     }
+
+    .column[data-gap="1"] {
+        gap: var(--space-1);
+    }
+
+    .column[data-gap="2"] {
+        gap: var(--space-2);
+    }
+
+    .column[data-gap="3"] {
+        gap: var(--space-3);
+    }
+
+    .column[data-gap="4"] {
+        gap: var(--space-4);
+    }
+
+    .column[data-gap="5"] {
+        gap: var(--space-5);
+    }
+
+    .column[data-gap="6"] {
+        gap: var(--space-6);
+    }
+
+    .column[data-gap="8"] {
+        gap: var(--space-8);
+    }
+
+    .column[data-gap="10"] {
+        gap: var(--space-10);
+    }
+
+    .column[data-gap="12"] {
+        gap: var(--space-12);
+    }
+
+    .column[data-gap="16"] {
+        gap: var(--space-16);
+    }
+
+    .column[data-align="start"] {
+        align-items: flex-start;
+    }
+
+    .column[data-align="center"] {
+        align-items: center;
+    }
+
+    .column[data-align="end"] {
+        align-items: flex-end;
+    }
+
+    .column[data-align="stretch"] {
+        align-items: stretch;
+    }
 }

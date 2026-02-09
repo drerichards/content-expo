@@ -7,17 +7,20 @@ type VideoCardProps = {
   isBookmarked: boolean;
   onToggleBookmark: () => void;
   onClick: () => void;
+  isSelected?: boolean;
 };
 
 const VideoCard = ({
-  video: { title, source, publishedAt, thumbnails },
+  video: { title, source, publishedAt, thumbnails, description },
   isBookmarked,
   onToggleBookmark,
   onClick,
+  isSelected = false,
 }: VideoCardProps) => {
   return (
     <div
       className={styles.row}
+      data-selected={isSelected}
       onClick={onClick}
       role="button"
       tabIndex={0}
@@ -31,7 +34,7 @@ const VideoCard = ({
             src={thumbnails[0].url as string}
             alt={title}
             fill
-            sizes="112px"
+            sizes="208px"
             className={styles.thumb}
             priority={false}
           />
@@ -39,14 +42,15 @@ const VideoCard = ({
       </div>
       <div className={styles.content}>
         <div className={styles.title}>{title}</div>
+        {description && <p className={styles.description}>{description}</p>}
         <div className={styles.meta}>
-          <span>{source}</span>
-          {/* {duration && <span>· {duration}</span>} */}
-          {publishedAt && <span>· {publishedAt.slice(0, 4)}</span>}
+          {source && <span className={styles.channel}>{source}</span>}
+          {publishedAt && <span>· {publishedAt.slice(0, 10)}</span>}
         </div>
       </div>
       <button
         className={styles.save}
+        data-saved={isBookmarked}
         onClick={(e) => {
           e.stopPropagation();
           onToggleBookmark();

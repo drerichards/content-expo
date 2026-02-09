@@ -13,12 +13,10 @@ export const BlockField = ({
   children,
 }: BlockFieldProps) => {
   const base = buildElementClasses({ color, density, typography });
-  const classes = [base, "block-field", `block-field--${direction}`, className]
-    .filter(Boolean)
-    .join(" ");
+  const classes = [base, "block-field", className].filter(Boolean).join(" ");
 
   return (
-    <Base as="label" className={classes}>
+    <Base as="label" className={classes} data-layout={direction}>
       <span className="block-field__label">{label}</span>
       <div className="block-field__control">{children}</div>
       {helper ? <span className="block-field__helper">{helper}</span> : null}

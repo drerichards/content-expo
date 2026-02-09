@@ -3,8 +3,22 @@
 
 import { Base } from "@/shared/ui/base";
 import styles from "./LayoutRow.module.css";
-import { LayoutComponentProps } from "@/shared/ui/layout/types";
+import { LayoutRowProps } from "@/shared/ui/layout/types";
 
-export const LayoutRow = ({ children }: LayoutComponentProps) => {
-  return <Base className={styles.row}>{children}</Base>;
+export const LayoutRow = ({
+  children,
+  gap,
+  align,
+  justify,
+}: LayoutRowProps) => {
+  return (
+    <Base
+      className={styles.row}
+      data-gap={gap}
+      data-align={align}
+      data-justify={justify}
+    >
+      {children}
+    </Base>
+  );
 };

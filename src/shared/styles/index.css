@@ -8,5 +8,6 @@
 @import './base.css' layer(base);
 
 @import './blocks.css' layer(blocks);
+@import './animations.css' layer(utilities);
 @import './utilities.css' layer(utilities);
 @import './overrides.css' layer(overrides);

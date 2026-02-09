@@ -1,0 +1,210 @@
+/* src/shared/styles/animations.css */
+@layer utilities {
+
+    /* =========================
+       FADE ANIMATIONS
+       ========================= */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+        }
+
+        to {
+            opacity: 0;
+        }
+    }
+
+    [data-animate="fade-in"] {
+        animation: fadeIn var(--duration-base) var(--ease-out);
+    }
+
+    [data-animate="fade-out"] {
+        animation: fadeOut var(--duration-base) var(--ease-in);
+    }
+
+    /* =========================
+       SLIDE ANIMATIONS
+       ========================= */
+    @keyframes slideInUp {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInDown {
+        from {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInLeft {
+        from {
+            transform: translateX(-20px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInRight {
+        from {
+            transform: translateX(20px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    [data-animate="slide-in-up"] {
+        animation: slideInUp var(--duration-base) var(--ease-out);
+    }
+
+    [data-animate="slide-in-down"] {
+        animation: slideInDown var(--duration-base) var(--ease-out);
+    }
+
+    [data-animate="slide-in-left"] {
+        animation: slideInLeft var(--duration-base) var(--ease-out);
+    }
+
+    [data-animate="slide-in-right"] {
+        animation: slideInRight var(--duration-base) var(--ease-out);
+    }
+
+    /* =========================
+       SCALE ANIMATIONS
+       ========================= */
+    @keyframes scaleIn {
+        from {
+            transform: scale(0.95);
+            opacity: 0;
+        }
+
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    @keyframes scaleOut {
+        from {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        to {
+            transform: scale(0.95);
+            opacity: 0;
+        }
+    }
+
+    [data-animate="scale-in"] {
+        animation: scaleIn var(--duration-base) var(--ease-out);
+    }
+
+    [data-animate="scale-out"] {
+        animation: scaleOut var(--duration-base) var(--ease-in);
+    }
+
+    /* =========================
+       STAGGER DELAYS
+       ========================= */
+    [data-stagger="1"] {
+        animation-delay: calc(var(--duration-fast) * 1);
+    }
+
+    [data-stagger="2"] {
+        animation-delay: calc(var(--duration-fast) * 2);
+    }
+
+    [data-stagger="3"] {
+        animation-delay: calc(var(--duration-fast) * 3);
+    }
+
+    [data-stagger="4"] {
+        animation-delay: calc(var(--duration-fast) * 4);
+    }
+
+    [data-stagger="5"] {
+        animation-delay: calc(var(--duration-fast) * 5);
+    }
+
+    /* =========================
+       TRANSITION UTILITIES
+       ========================= */
+    [data-transition="all"] {
+        transition: all var(--duration-base) var(--ease-out);
+    }
+
+    [data-transition="colors"] {
+        transition: color var(--duration-base) var(--ease-out),
+            background-color var(--duration-base) var(--ease-out),
+            border-color var(--duration-base) var(--ease-out);
+    }
+
+    [data-transition="transform"] {
+        transition: transform var(--duration-base) var(--ease-out);
+    }
+
+    [data-transition="opacity"] {
+        transition: opacity var(--duration-base) var(--ease-out);
+    }
+
+    /* Speed modifiers */
+    [data-speed="fast"] {
+        animation-duration: var(--duration-fast);
+        transition-duration: var(--duration-fast);
+    }
+
+    [data-speed="slow"] {
+        animation-duration: var(--duration-slow);
+        transition-duration: var(--duration-slow);
+    }
+
+    [data-speed="slower"] {
+        animation-duration: var(--duration-slower);
+        transition-duration: var(--duration-slower);
+    }
+
+    /* =========================
+       REDUCED MOTION
+       ========================= */
+    @media (prefers-reduced-motion: reduce) {
+
+        [data-animate],
+        [data-transition],
+        [data-stagger] {
+            animation: none !important;
+            transition: none !important;
+            animation-delay: 0 !important;
+        }
+    }
+}

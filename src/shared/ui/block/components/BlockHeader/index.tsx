@@ -10,10 +10,10 @@ export const BlockHeader = ({
   children,
 }: BlockHeaderProps) => {
   const base = buildElementClasses({ color, density, typography });
-  const classes = [base, "focus-ring", className].filter(Boolean).join(" ");
+  const classes = [base, "block-header", className].filter(Boolean).join(" ");
 
   return (
-    <Base as="header" className={classes} tabIndex={0}>
+    <Base as="header" className={classes}>
       {children}
     </Base>
   );

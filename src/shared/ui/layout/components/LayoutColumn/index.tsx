@@ -3,8 +3,12 @@
 
 import { Base } from "@/shared/ui/base";
 import styles from "./LayoutColumn.module.css";
-import { LayoutComponentProps } from "@/shared/ui/layout/types";
+import { LayoutColumnProps } from "@/shared/ui/layout/types";
 
-export const LayoutColumn = ({ children }: LayoutComponentProps) => {
-  return <Base className={styles.column}>{children}</Base>;
+export const LayoutColumn = ({ children, gap, align }: LayoutColumnProps) => {
+  return (
+    <Base className={styles.column} data-gap={gap} data-align={align}>
+      {children}
+    </Base>
+  );
 };

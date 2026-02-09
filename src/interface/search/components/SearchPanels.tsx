@@ -19,7 +19,12 @@ export const SearchPanels = ({
   emptyMessage,
 }: Props) => {
   const { isSideOpen, isPanelExpanded } = useSearchPanel();
-  const { selectedItem } = resultsPanelProps;
+  const { selectedItem, hasSearched, isLoading } = resultsPanelProps;
+
+  // Show only results when: loading, just searched with no selection, or no results yet
+  // Hide content panel to give results full screen
+  const showResultsOnly = isLoading || (hasSearched && !selectedItem);
+  const sideOpen = showResultsOnly ? false : selectedItem ? isSideOpen : true;
 
   if (!selectedItem && emptyMessage) {
     return (
@@ -30,9 +35,9 @@ export const SearchPanels = ({
   }
 
   return (
-    <PanelContainer sideOpen={isSideOpen} panelCollapsed={!isPanelExpanded}>
+    <PanelContainer sideOpen={sideOpen} panelCollapsed={!isPanelExpanded}>
       <SearchResultsPanel {...resultsPanelProps} />
-      <SearchContentPanel {...detailPanelProps} />
+      {!showResultsOnly && <SearchContentPanel {...detailPanelProps} />}
     </PanelContainer>
   );
 };

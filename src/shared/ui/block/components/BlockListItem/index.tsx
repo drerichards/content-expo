@@ -13,13 +13,7 @@ export const BlockListItem = ({
   children,
 }: BlockListItemProps) => {
   const base = buildElementClasses({ color, density, typography });
-  const classes = [
-    base,
-    "row",
-    isSelected ? "is-selected" : "",
-    isInteractive ? "action focus-ring" : "",
-    className,
-  ]
+  const classes = [base, "block-list-item", className]
     .filter(Boolean)
     .join(" ");
 
@@ -28,6 +22,8 @@ export const BlockListItem = ({
       as="li"
       className={classes}
       onClick={onClick}
+      data-interactive={isInteractive}
+      data-selected={isSelected}
       style={isInteractive ? { cursor: "pointer" } : undefined}
       aria-disabled={!isInteractive}
     >

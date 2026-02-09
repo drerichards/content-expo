@@ -1,17 +1,107 @@
 /* src/interface/navigation/AppTopNavigation/SearchControls/SearchControls.module.css */
 
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-6);
+}
+
 .welcome {
-    margin-bottom: var(--space-2);
-    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex-shrink: 0;
+}
+
+.welcomeMain {
+    font-size: var(--fs-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--ink-primary);
+    line-height: var(--leading-tight);
+}
+
+.welcomeSub {
+    font-size: var(--fs-sm);
+    font-weight: var(--font-weight-regular);
+    color: var(--ink-secondary);
+    opacity: 0.7;
+    line-height: var(--leading-tight);
+}
+
+.rightSide {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
 }
 
 .form {
     display: flex;
-    flex-direction: column;
-    gap: var(--space-3);
-    width: 100%;
+    align-items: center;
+    gap: var(--space-6);
+    flex-shrink: 0;
+}
+
+.alertButton {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    border: var(--border-strong);
+    border-radius: var(--radius-xl);
+    background: var(--surface-primary);
+    color: var(--ink-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background var(--duration-fast) var(--ease-out),
+        transform var(--duration-fast) var(--ease-out);
+}
+
+.alertButton:hover {
+    background: var(--surface-hover);
+    transform: translate(2px, 2px);
+}
+
+.alertIcon {
+    font-size: var(--fs-xl);
+}
+
+.alertBadge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 24px;
+    height: 24px;
+    background: var(--accent-orange-1);
+    border: 2px solid var(--ink-primary);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--fs-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--ink-primary);
 }
 
 .submit {
-    align-self: flex-start;
+    height: 56px;
+    padding: 0 var(--space-6);
+    background: var(--ink-primary);
+    color: var(--ink-inverse);
+    border: var(--border-strong);
+    border-radius: var(--radius-xl);
+    font-size: var(--fs-md);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background var(--duration-fast) var(--ease-out),
+        transform var(--duration-fast) var(--ease-out);
+}
+
+.submit:hover {
+    background: var(--accent-blue-1);
+    transform: translate(2px, 2px);
 }

@@ -43,7 +43,11 @@ const VideoDetailHeader = ({
         </Button>
         <Header className={styles.title}>{title}</Header>
 
-        <Button onClick={onToggleBookmark}>
+        <Button
+          className={styles.saveButton}
+          data-saved={isBookmarked}
+          onClick={onToggleBookmark}
+        >
           {isBookmarked ? "Saved" : "Save"}
         </Button>
       </LayoutRow>

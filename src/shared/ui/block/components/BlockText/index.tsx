@@ -6,6 +6,7 @@ export const BlockText = ({
   title,
   body,
   meta,
+  variant,
   color,
   density,
   typography,
@@ -15,13 +16,14 @@ export const BlockText = ({
   const base = shouldApplyBase
     ? buildElementClasses({ color, density, typography })
     : undefined;
-  const classes = [base, className].filter(Boolean).join(" ") || undefined;
+  const classes =
+    ["block-text", base, className].filter(Boolean).join(" ") || undefined;
 
   return (
-    <Base className={classes}>
-      {title && <Base className="text-title">{title}</Base>}
-      {body && <Base className="text-body">{body}</Base>}
-      {meta && <Base className="text-meta">{meta}</Base>}
+    <Base className={classes} data-variant={variant}>
+      {title && <Base data-variant="title">{title}</Base>}
+      {body && <Base data-variant="body">{body}</Base>}
+      {meta && <Base data-variant="meta">{meta}</Base>}
     </Base>
   );
 };

@@ -11,7 +11,9 @@ export const UpNextPanel = ({ items, onSelectItem }: UpNextPanelProps) => {
     <aside className={styles.upNextPanel}>
       <div className={styles.header}>
         <h2 className={styles.title}>Up Next</h2>
-        <p className={styles.subtitle}>Your curated path forward</p>
+        <p className={styles.subtitle}>
+          Suggested videos for your learning path
+        </p>
       </div>
       <div className={styles.itemsList}>
         {items.map((item) => (

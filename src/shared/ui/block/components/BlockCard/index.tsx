@@ -12,12 +12,14 @@ export const BlockCard = ({
   children,
 }: BlockCardProps) => {
   const base = buildElementClasses({ color, density, typography });
-  const classes = [base, isInteractive ? "action focus-ring" : "", className]
-    .filter(Boolean)
-    .join(" ");
+  const classes = [base, "block-card", className].filter(Boolean).join(" ");
 
   return (
-    <Base className={classes} aria-disabled={!isInteractive}>
+    <Base
+      className={classes}
+      data-interactive={isInteractive}
+      aria-disabled={!isInteractive}
+    >
       {title && (
         <Base as="h3" className="text-title">
           {title}

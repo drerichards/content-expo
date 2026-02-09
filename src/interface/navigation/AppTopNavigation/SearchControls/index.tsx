@@ -2,13 +2,6 @@
 
 import type { FormEvent } from "react";
 import { SearchControlsContextValue } from "@/interface/search/context/SearchControlsContext";
-import {
-  Card,
-  Button,
-  Form,
-  Section,
-  Text,
-} from "@/shared/ui/block";
 import styles from "./SearchControls.module.css";
 import { SearchFilters } from "../SearchFilters";
 import { SearchInput } from "../SearchInput";
@@ -29,25 +22,26 @@ export const SearchControls = ({
   };
 
   return (
-    <Section>
-      <Text className={styles.welcome} body={welcomeText} />
+    <div className={styles.container}>
+      <div className={styles.welcome}>
+        <div className={styles.welcomeMain}>Welcome back, Jordan</div>
+        <div className={styles.welcomeSub}>Ready to continue learning?</div>
+      </div>
 
-      <Card density="tight">
-        <Form className={styles.form} onSubmit={handleSubmit}>
-          <SearchInput query={query} onQueryChange={onQueryChange} />
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <SearchInput
+          query={query}
+          onQueryChange={onQueryChange}
+          onSubmit={() => onSearch(query)}
+        />
 
-          <SearchFilters
-            context={context}
-            onContextChange={onContextChange}
-            level={level}
-            onLevelChange={onLevelChange}
-          />
-
-          <Button type="submit" className={styles.submit}>
-            Search
-          </Button>
-        </Form>
-      </Card>
-    </Section>
+        <SearchFilters
+          context={context}
+          onContextChange={onContextChange}
+          level={level}
+          onLevelChange={onLevelChange}
+        />
+      </form>
+    </div>
   );
 };

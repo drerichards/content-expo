@@ -1,5 +1,6 @@
 .contentContainer {
-  flex: 1;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  padding: var(--space-6);
+  overflow-y: auto;
 }

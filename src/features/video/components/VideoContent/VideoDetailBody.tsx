@@ -7,40 +7,74 @@ export type VideoDetailBodyProps = {
   embedHeight: string;
   description: string;
   source: string;
+  title?: string;
 };
 
 const VideoDetailBody = ({
   isVideo,
   mediaUrl,
-  embedHeight,
   description,
   source,
+  title,
 }: VideoDetailBodyProps) => {
   const [isSummaryOpen, setIsSummaryOpen] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const summaryCta = isVideo ? "Watch on YouTube" : "Read full article";
   const summaryTitle = "Summary";
 
+  const handlePlay = () => {
+    setIsPlaying(true);
+  };
+
   return (
     <div className={styles.mediaWrapper}>
-      {isVideo ? (
-        <iframe
-          width="100%"
-          height={embedHeight}
-          className={styles.mediaEmbed}
-          src={`https://www.youtube.com/embed/${new URL(mediaUrl).searchParams.get("v")}`}
-          title="Video"
-          allowFullScreen
-        ></iframe>
-      ) : (
-        <iframe
-          src={mediaUrl}
-          className={styles.mediaEmbed}
-          onError={(e) => {
-            (e.currentTarget as HTMLIFrameElement).style.display = "none";
-          }}
-        />
-      )}
+      <div className={styles.videoContainer}>
+        {isVideo && !isPlaying ? (
+          <>
+            {/* Play Button Overlay */}
+            <button
+              className={styles.playButton}
+              onClick={handlePlay}
+              aria-label="Play video"
+            >
+              <svg
+                className={styles.playIcon}
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg>
+            </button>
+
+            {/* Title Overlay */}
+            {title && <div className={styles.videoTitle}>{title}</div>}
+
+            {/* Progress Bar */}
+            <div className={styles.progressBar}>
+              <div className={styles.progressFill} style={{ width: "0%" }} />
+            </div>
+          </>
+        ) : isVideo ? (
+          <iframe
+            className={styles.mediaEmbed}
+            src={`https://www.youtube.com/embed/${new URL(mediaUrl).searchParams.get("v")}?autoplay=1`}
+            title="Video"
+            allow="autoplay"
+            allowFullScreen
+          />
+        ) : (
+          <iframe
+            src={mediaUrl}
+            className={styles.mediaEmbed}
+            onError={(e) => {
+              (e.currentTarget as HTMLIFrameElement).style.display = "none";
+            }}
+          />
+        )}
+      </div>
 
       <button
         type="button"

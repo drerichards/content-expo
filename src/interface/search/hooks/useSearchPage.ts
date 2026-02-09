@@ -33,6 +33,8 @@ export const useSearchPage = () => {
       onVideoSearch(value);
       setHasSearched(true);
       setSelectedItem(undefined);
+      setIsSideOpen(false); // Hide results panel while searching
+      setIsPanelExpanded(true); // Ensure expanded when results come back
     },
     [onVideoSearch],
   );
@@ -40,6 +42,7 @@ export const useSearchPage = () => {
   const handleSelectItem = useCallback((item: ContentItem) => {
     setSelectedItem(item);
     setIsSideOpen(true);
+    setIsPanelExpanded(false); // Auto-collapse results panel for full screen content
   }, []);
 
   const emptyMessage = useMemo(() => {
@@ -53,7 +56,7 @@ export const useSearchPage = () => {
   const handleCloseContentPanel = useCallback(() => {
     setSelectedItem(undefined);
     setIsSideOpen(false);
-    setIsPanelExpanded(true);
+    setIsPanelExpanded(true); // Expand results when closing content
   }, []);
 
   const togglePanelExpand = useCallback(

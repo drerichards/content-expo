@@ -1,25 +1,33 @@
 /* src/shared/ui/frame/AppFrame/AppFrame.module.css */
 @layer blocks {
     .frame {
-        display: grid;
-        grid-template-rows: auto 1fr;
-        grid-template-columns: auto 1fr;
-        grid-template-areas:
-            'top top'
-            'side main';
-        min-height: 100svh;
-    }
-
-    .top {
-        grid-area: top;
+        display: flex;
+        height: 100svh;
+        background: var(--app-bg);
     }
 
     .side {
-        grid-area: side;
+        flex-shrink: 0;
+        overflow-y: auto;
+    }
+
+    .content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .top {
+        flex-shrink: 0;
+        background: var(--app-bg);
+        border-bottom: var(--border-strong);
+        padding: var(--space-6) var(--space-8);
     }
 
     .main {
-        grid-area: main;
-        min-width: 0;
+        flex: 1;
+        overflow-y: auto;
     }
 }
