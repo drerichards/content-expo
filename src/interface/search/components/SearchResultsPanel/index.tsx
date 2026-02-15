@@ -3,8 +3,8 @@
 import { ContentItem } from "@/types";
 import { VideoSearchResult } from "@/features/video/types";
 import { LayoutPanel } from "@/shared/ui/layout";
-import ErrorBoundary from "@/shared/ui/components/ErrorBoundary";
-import VideoCard from "@/features/video/components/VideoCard";
+import { ErrorBoundary } from "@/shared/ui/components/ErrorBoundary";
+import { VideoCard } from "@/features/video/components/VideoCard";
 import { useBookmarks } from "@/features/bookmark/hooks/useBookmarks";
 import styles from "./SearchResultsPanel.module.css";
 

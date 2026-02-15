@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import type { Bookmark } from "../types";
 import { bookmarkService } from "../api/bookmarkService";
 
@@ -12,13 +12,8 @@ export const useBookmarks = () => {
 
   const refreshBookmarks = () => {
     const stored = bookmarkService.getAll();
-    console.log("[useBookmarks] refreshBookmarks loaded:", stored.length);
     setBookmarks(stored);
   };
-
-  useEffect(() => {
-    console.log("[useBookmarks] bookmarks state updated:", bookmarks.length);
-  }, [bookmarks]);
 
   const bookmarkedIds = useMemo(
     () => new Set(bookmarks.map((b) => b.id)),

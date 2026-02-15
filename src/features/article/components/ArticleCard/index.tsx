@@ -8,7 +8,7 @@ type ArticleCardProps = {
   onToggleBookmark: () => void;
 };
 
-const ArticleCard = ({
+export const ArticleCard = ({
   title,
   source,
   isBookmarked,
@@ -41,4 +41,3 @@ const ArticleCard = ({
   );
 };
 
-export default ArticleCard;

@@ -1,6 +1,3 @@
-// src/interface/search/hooks/useSearchPage.ts
-// FIX: adapt toggleBookmark so its signature matches SearchDetailPanelProps
-
 "use client";
 
 import { useCallback, useMemo, useState } from "react";

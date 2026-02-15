@@ -1,6 +1,5 @@
 import { Button, Text, Header } from "@/shared/ui/block";
 import { LayoutRow } from "@/shared/ui/layout";
-import { useSearchPanel } from "@/interface/search/context/SearchPanelContext";
 import styles from "./VideoContent.module.css";
 
 export type VideoDetailHeaderProps = {
@@ -8,19 +7,22 @@ export type VideoDetailHeaderProps = {
   source: string;
   publishedAt: string;
   isBookmarked: boolean;
+  isPanelExpanded: boolean;
+  onToggleExpand: () => void;
   onToggleBookmark: () => void;
   onClose: () => void;
 };
 
-const VideoDetailHeader = ({
+export const VideoDetailHeader = ({
   title,
   source,
   publishedAt,
   isBookmarked,
+  isPanelExpanded,
+  onToggleExpand,
   onToggleBookmark,
   onClose,
 }: VideoDetailHeaderProps) => {
-  const { isPanelExpanded, togglePanelExpand } = useSearchPanel();
   return (
     <>
       <Button
@@ -35,7 +37,7 @@ const VideoDetailHeader = ({
       <LayoutRow>
         <Button
           className={styles.toggleButton}
-          onClick={togglePanelExpand}
+          onClick={onToggleExpand}
           title={isPanelExpanded ? "Collapse panel" : "Expand panel"}
           aria-label={isPanelExpanded ? "Collapse panel" : "Expand panel"}
         >
@@ -59,4 +61,3 @@ const VideoDetailHeader = ({
   );
 };
 
-export default VideoDetailHeader;

@@ -4,6 +4,6 @@ type ContentContainerProps = {
   children?: React.ReactNode;
 };
 
-export default function ContentContainer({ children }: ContentContainerProps) {
+export const ContentContainer = ({ children }: ContentContainerProps) => {
   return <div className={styles.contentContainer}>{children}</div>;
-}
+};

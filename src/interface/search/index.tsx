@@ -1,6 +1,3 @@
-// src/interface/search/index.tsx
-// FIX: remove any reference to `videos`
-
 "use client";
 
 import { useMemo } from "react";
@@ -9,7 +6,7 @@ import { SearchPageLayout, SearchPanels } from "./components";
 import { useRegisterSearchControls } from "./context/SearchControlsContext";
 import { SearchPanelProvider } from "./context/SearchPanelContext";
 
-const SearchPageUI = () => {
+export const SearchPageUI = () => {
   const {
     query,
     context,
@@ -98,4 +95,3 @@ const SearchPageUI = () => {
   );
 };
 
-export default SearchPageUI;

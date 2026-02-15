@@ -10,7 +10,7 @@ export type VideoDetailBodyProps = {
   title?: string;
 };
 
-const VideoDetailBody = ({
+export const VideoDetailBody = ({
   isVideo,
   mediaUrl,
   description,
@@ -107,4 +107,3 @@ const VideoDetailBody = ({
   );
 };
 
-export default VideoDetailBody;

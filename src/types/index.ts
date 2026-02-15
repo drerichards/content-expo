@@ -1,6 +1,6 @@
 // src/types/index.ts
 
-type ContentType = "video" | "article" | "playlist";
+export type ContentType = "video" | "article" | "playlist";
 
 export type ContentItem = {
   id: string;

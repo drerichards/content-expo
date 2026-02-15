@@ -17,7 +17,6 @@ export class BookmarkService {
         return [];
       }
 
-      console.log("[BookmarkService] Loaded bookmarks from localStorage:", parsed.length);
       return parsed;
     } catch (error) {
       console.error("[BookmarkService] Failed to parse bookmarks from localStorage", error);

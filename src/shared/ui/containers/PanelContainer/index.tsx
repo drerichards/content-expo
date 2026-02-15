@@ -7,11 +7,11 @@ type PanelContainerProps = {
   panelCollapsed?: boolean;
 };
 
-export default function PanelContainer({
+export const PanelContainer = ({
   children,
   sideOpen,
   panelCollapsed,
-}: PanelContainerProps) {
+}: PanelContainerProps) => {
   return (
     <Base
       className={styles.panelContainer}
@@ -21,4 +21,4 @@ export default function PanelContainer({
       {children}
     </Base>
   );
-}
+};

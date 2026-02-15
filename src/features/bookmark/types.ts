@@ -1,3 +1,5 @@
+import type { ContentType } from "@/types";
+
 export type Bookmark = {
   id: string;
   provider: "video" | "web";
@@ -10,5 +12,3 @@ export type Bookmark = {
   publishedAt: string;
   description: string;
 };
-
-type ContentType = "video" | "article" | "playlist";

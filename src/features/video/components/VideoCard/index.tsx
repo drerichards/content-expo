@@ -10,7 +10,7 @@ type VideoCardProps = {
   isSelected?: boolean;
 };
 
-const VideoCard = ({
+export const VideoCard = ({
   video: { title, source, publishedAt, thumbnails, description },
   isBookmarked,
   onToggleBookmark,
@@ -62,4 +62,3 @@ const VideoCard = ({
   );
 };
 
-export default VideoCard;

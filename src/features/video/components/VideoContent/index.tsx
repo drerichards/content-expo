@@ -1,20 +1,24 @@
 import { ContentItem } from "@/types";
-import ContentContainer from "@/shared/ui/containers/ContentContainer";
-import VideoDetailHeader from "./VideoDetailHeader";
-import VideoDetailBody from "./VideoDetailBody";
+import { ContentContainer } from "@/shared/ui/containers/ContentContainer";
+import { VideoDetailHeader } from "./VideoDetailHeader";
+import { VideoDetailBody } from "./VideoDetailBody";
 
 type VideoContentProps = {
   item: ContentItem;
   embedHeight: string;
   isBookmarked: boolean;
+  isPanelExpanded: boolean;
+  onToggleExpand: () => void;
   onToggleBookmark: () => void;
   onMainPanelClose: () => void;
 };
 
-const VideoContent = ({
+export const VideoContent = ({
   item,
   embedHeight,
   isBookmarked,
+  isPanelExpanded,
+  onToggleExpand,
   onToggleBookmark,
   onMainPanelClose,
 }: VideoContentProps) => {
@@ -27,6 +31,8 @@ const VideoContent = ({
         source={item.source}
         publishedAt={item.publishedAt}
         isBookmarked={isBookmarked}
+        isPanelExpanded={isPanelExpanded}
+        onToggleExpand={onToggleExpand}
         onToggleBookmark={onToggleBookmark}
         onClose={onMainPanelClose}
       />
@@ -42,4 +48,3 @@ const VideoContent = ({
   );
 };
 
-export default VideoContent;
